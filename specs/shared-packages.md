@@ -49,6 +49,23 @@ export { screens } from './screens';
 }
 ```
 
+### packages/tokens/tsconfig.json
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "include": ["src"]
+}
+```
+
 ---
 
 ## packages/ui/

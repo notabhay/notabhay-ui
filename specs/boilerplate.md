@@ -65,7 +65,7 @@ Build the [TEMPLATE_NAME] template at `templates/[slug]/`.
 - Do NOT modify anything outside `templates/[slug]/`
 - Do NOT run `bun install` at the root (main agent handles this)
 - Do NOT recreate or modify `package.json` — it already exists as a stub from Phase 1
-- You CAN run `bun add @fontsource/...` inside your template dir to install fonts
+- You CAN run `bun add` inside your template dir to install fonts and any template-specific deps mentioned in your spec (e.g., cmdk for Neon)
 - Do NOT create a `tailwind.config.ts` file (Tailwind v4 is CSS-first)
 - Import shared components from `@notabhay-ui/ui`
 - Import ThemeProvider from `@notabhay-ui/ui`
@@ -85,6 +85,9 @@ Build the [TEMPLATE_NAME] template at `templates/[slug]/`.
 
 ## Your Template Spec
 [Include: the specific template's design spec]
+
+## Quality Bar & AVOID List
+[Include: quality bar from CLAUDE.md + global AVOID list from specs/quality.md]
 
 ## Definition of Done for Your Template
 - [ ] `bun run build` succeeds with zero errors

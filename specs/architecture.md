@@ -17,7 +17,7 @@ This file contains all the required configuration files for the monorepo and tem
     "packages/*"
   ],
   "scripts": {
-    "build": "bun run --filter '*' build",
+    "build": "bun run build:packages && bun run --filter '*' --filter '!@notabhay-ui/tokens' --filter '!@notabhay-ui/ui' build",
     "dev": "bun run --filter '*' dev",
     "lint": "bun run --filter '*' lint",
     "build:packages": "bun run --filter '@notabhay-ui/tokens' build && bun run --filter '@notabhay-ui/ui' build"

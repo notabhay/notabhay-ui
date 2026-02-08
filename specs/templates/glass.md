@@ -15,17 +15,17 @@
 | background   | #0f0f23            | #f0f4ff            |
 | foreground   | #f1f5f9            | #0f172a            |
 | primary      | #818cf8            | #6366f1            |
-| primary-fg   | #ffffff            | #ffffff            |
+| primary-foreground   | #ffffff            | #ffffff            |
 | secondary    | #334155            | #e2e8f0            |
-| secondary-fg | #f1f5f9            | #0f172a            |
+| secondary-foreground | #f1f5f9            | #0f172a            |
 | muted        | #1a1a30            | #e8ecf4            |
-| muted-fg     | #94a3b8            | #475569            |
+| muted-foreground     | #94a3b8            | #475569            |
 | accent       | #818cf8            | #6366f1            |
-| accent-fg    | #ffffff            | #ffffff            |
+| accent-foreground    | #ffffff            | #ffffff            |
 | destructive  | #ef4444            | #dc2626            |
 | border       | oklch(1 0 0 / 10%) | oklch(0 0 0 / 8%)  |
 | card         | oklch(1 0 0 / 6%)  | oklch(1 0 0 / 70%) |
-| card-fg      | #f1f5f9            | #0f172a            |
+| card-foreground      | #f1f5f9            | #0f172a            |
 | ring         | #818cf8            | #6366f1            |
 
 **Accessibility note:** Minimum card background opacity: 0.06 dark / 0.6 light (text MUST be readable through glass). Max 2 glass layers stacked.

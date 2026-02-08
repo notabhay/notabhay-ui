@@ -15,17 +15,17 @@
 | background       | #1a1a1a | #f5f0eb (cream) |
 | foreground       | #f5f0eb | #1a1a1a         |
 | primary (red)    | #dc2626 | #dc2626         |
-| primary-fg       | #ffffff | #ffffff         |
+| primary-foreground       | #ffffff | #ffffff         |
 | secondary (blue) | #2563eb | #2563eb         |
-| secondary-fg     | #ffffff | #ffffff         |
+| secondary-foreground     | #ffffff | #ffffff         |
 | muted            | #262626 | #ebe5de         |
 | muted-foreground | #a1a1a1 | #666666         |
 | accent           | #dc2626 | #dc2626         |
-| accent-fg        | #ffffff | #ffffff         |
+| accent-foreground        | #ffffff | #ffffff         |
 | destructive      | #ef4444 | #dc2626         |
 | border           | #404040 | #1a1a1a         |
 | card             | #222222 | #ede8e2         |
-| card-fg          | #f5f0eb | #1a1a1a         |
+| card-foreground          | #f5f0eb | #1a1a1a         |
 | ring             | #dc2626 | #dc2626         |
 
 **Accessibility note:** Ochre (#ca8a04) allowed for decorative/large text ONLY. Fails AA for body text on cream.

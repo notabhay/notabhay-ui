@@ -15,17 +15,17 @@
 | background       | #1a1518 | #fef7f0 |
 | foreground       | #f5ede6 | #2d1f1a |
 | primary (rose)   | #f472b6 | #e11d48 |
-| primary-fg       | #1a1518 | #ffffff |
+| primary-foreground       | #1a1518 | #ffffff |
 | secondary (sage) | #86efac | #16a34a |
-| secondary-fg     | #1a1518 | #ffffff |
+| secondary-foreground     | #1a1518 | #ffffff |
 | muted            | #2a2025 | #faebd7 |
 | muted-foreground | #a89090 | #8b7355 |
 | accent           | #f472b6 | #e11d48 |
-| accent-fg        | #1a1518 | #ffffff |
+| accent-foreground        | #1a1518 | #ffffff |
 | destructive      | #ef4444 | #dc2626 |
 | border           | #3d2f35 | #e8c9a8 |
 | card             | #211a1e | #fff5eb |
-| card-fg          | #f5ede6 | #2d1f1a |
+| card-foreground          | #f5ede6 | #2d1f1a |
 | ring             | #f472b6 | #e11d48 |
 
 **Accessibility note:** Light sage changed to `#16a34a` for WCAG AA. Light border darkened to `#e8c9a8` for visible contrast. Rose accent limited to <15% of visible surface.

@@ -17,17 +17,17 @@
 | background       | #1a1025 | #fffbfe |
 | foreground       | #faf5ff | #1a1025 |
 | primary (violet) | #a855f7 | #9333ea |
-| primary-fg       | #ffffff | #ffffff |
+| primary-foreground       | #ffffff | #ffffff |
 | secondary (pink) | #f472b6 | #ec4899 |
-| secondary-fg     | #1a1025 | #ffffff |
+| secondary-foreground     | #1a1025 | #ffffff |
 | accent (cyan)    | #22d3ee | #06b6d4 |
-| accent-fg        | #1a1025 | #ffffff |
+| accent-foreground        | #1a1025 | #ffffff |
 | muted            | #251835 | #f5eeff |
-| muted-fg         | #a78bfa | #7c3aed |
+| muted-foreground         | #a78bfa | #7c3aed |
 | destructive      | #ef4444 | #dc2626 |
 | border           | #2e1f3e | #f0e4ff |
 | card             | #1f1330 | #fffbfe |
-| card-fg          | #faf5ff | #1a1025 |
+| card-foreground          | #faf5ff | #1a1025 |
 | ring             | #a855f7 | #9333ea |
 
 ---

@@ -17,17 +17,17 @@
 | background    | #111111 | #ffffff |
 | foreground    | #ffffff | #111111 |
 | primary (red) | #ff0000 | #dc2626 |
-| primary-fg    | #ffffff | #ffffff |
+| primary-foreground    | #ffffff | #ffffff |
 | secondary     | #666666 | #999999 |
-| secondary-fg  | #ffffff | #111111 |
+| secondary-foreground  | #ffffff | #111111 |
 | muted         | #1a1a1a | #f5f5f5 |
-| muted-fg      | #888888 | #666666 |
+| muted-foreground      | #888888 | #666666 |
 | accent        | #ff0000 | #dc2626 |
-| accent-fg     | #ffffff | #ffffff |
+| accent-foreground     | #ffffff | #ffffff |
 | destructive   | #ef4444 | #dc2626 |
 | border        | #333333 | #dddddd |
 | card          | #161616 | #ffffff |
-| card-fg       | #ffffff | #111111 |
+| card-foreground       | #ffffff | #111111 |
 | ring          | #ff0000 | #dc2626 |
 
 **Accessibility note:** Light mode red changed to `#dc2626` for WCAG AA body text compliance. Pure `#ff0000` only for large headings/decorative use.

@@ -6,6 +6,8 @@
 
 **Fonts:** `@fontsource/fraunces` (headings, weights 400/600/700) + `@fontsource/source-serif-4` (body, weights 400/500) + `@fontsource/jetbrains-mono` (code/data, weight 400)
 
+**Note:** This template requires 3 Fontsource packages in its `package.json` (not the usual 2). The Phase 1 stub must include all three. Sub-agent should `bun add @fontsource/jetbrains-mono` if it's missing.
+
 ---
 
 ## Colors
@@ -15,17 +17,17 @@
 | background    | #1c1917 | #fffdf8 |
 | foreground    | #fafaf9 | #1c1917 |
 | primary (ink) | #c084fc | #7c3aed |
-| primary-fg    | #ffffff | #ffffff |
+| primary-foreground    | #ffffff | #ffffff |
 | secondary     | #a3a3a3 | #525252 |
-| secondary-fg  | #1c1917 | #ffffff |
+| secondary-foreground  | #1c1917 | #ffffff |
 | muted         | #292524 | #f5f0eb |
-| muted-fg      | #a8a29e | #78716c |
+| muted-foreground      | #a8a29e | #78716c |
 | accent        | #c084fc | #7c3aed |
-| accent-fg     | #ffffff | #ffffff |
+| accent-foreground     | #ffffff | #ffffff |
 | destructive   | #ef4444 | #dc2626 |
 | border        | #3f3f3e | #d6d3d1 |
 | card          | #211f1d | #fffdf8 |
-| card-fg       | #fafaf9 | #1c1917 |
+| card-foreground       | #fafaf9 | #1c1917 |
 | ring          | #c084fc | #7c3aed |
 
 ---

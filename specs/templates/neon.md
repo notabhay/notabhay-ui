@@ -15,17 +15,17 @@
 | background        | #0c0c14 | #f8fafc |
 | foreground        | #e2e8f0 | #0f172a |
 | primary (cyan)    | #22d3ee | #0891b2 |
-| primary-fg        | #0c0c14 | #ffffff |
+| primary-foreground        | #0c0c14 | #ffffff |
 | secondary (green) | #a3e635 | #4d7c0f |
-| secondary-fg      | #0c0c14 | #ffffff |
+| secondary-foreground      | #0c0c14 | #ffffff |
 | muted             | #131320 | #f1f5f9 |
 | muted-foreground  | #64748b | #475569 |
 | accent            | #a3e635 | #4d7c0f |
-| accent-fg         | #0c0c14 | #ffffff |
+| accent-foreground         | #0c0c14 | #ffffff |
 | destructive       | #ef4444 | #dc2626 |
 | border            | #1e293b | #e2e8f0 |
 | card              | #10101c | #ffffff |
-| card-fg           | #e2e8f0 | #0f172a |
+| card-foreground           | #e2e8f0 | #0f172a |
 | ring              | #22d3ee | #0891b2 |
 
 **Accessibility note:** Light mode green changed to `#4d7c0f` for WCAG AA compliance on light backgrounds.

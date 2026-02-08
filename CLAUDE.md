@@ -40,11 +40,11 @@ This workspace is organized for Claude Code + Ralph Wiggum loop compatibility:
 
 1. `git init` + `.gitignore`
 2. Create root `package.json` (Bun workspaces), root `tsconfig.json`, root `eslint.config.mjs` — read `specs/architecture.md` for exact file contents
-3. Create `packages/tokens/` — shared structural tokens — see `@specs/shared-packages.md`
-4. Create `packages/ui/` (including its `tsconfig.json` with `@/` path aliases) — install shadcn via `bunx shadcn@3.8.4 init`, build all 8 components with full variant support — see `@specs/shared-packages.md`
-5. Create shared mock data types in `packages/ui/src/types/mock-data.ts` — see `@specs/shared-packages.md`
-6. Create `packages/ui/src/lib/theme-provider.tsx` — shared ThemeProvider — see `@specs/shared-packages.md`
-7. Create stub `package.json` files for ALL 9 templates AND `apps/showcase/package.json` — these MUST exist before `bun install`. Use template `package.json` pattern from `specs/architecture.md`
+3. Create `packages/tokens/` — shared structural tokens — see `specs/shared-packages.md`
+4. Create `packages/ui/` (including its `tsconfig.json` with `@/` path aliases) — install shadcn via `bunx shadcn@3.8.4 init`, build all 8 components with full variant support — see `specs/shared-packages.md`
+5. Create shared mock data types in `packages/ui/src/types/mock-data.ts` — see `specs/shared-packages.md`
+6. Create `packages/ui/src/lib/theme-provider.tsx` — shared ThemeProvider — see `specs/shared-packages.md`
+7. Create stub `package.json` files for ALL 9 templates AND `apps/showcase/package.json` — these MUST exist before `bun install`. Use template `package.json` pattern from `specs/architecture.md`. *Replace all placeholders* (`[slug]`, `[PORT]`, `[heading-font]`, `[body-font]`) with actual values from the port assignments table above and each template's font names in `specs/templates/[slug].md`. For showcase, see `specs/showcase.md`.
 8. Run `bun install` ONCE at root — all workspaces resolve
 9. Verify: `bun run build` passes for `@notabhay-ui/tokens` and `@notabhay-ui/ui`
 10. Write `TEMPLATE_AGENT_BRIEF.md` to disk (shared context for sub-agents — architecture, CSS variable contract, page requirements, demo content, quality bar). Target ~15KB. Strip orchestration notes.
@@ -337,7 +337,7 @@ When building showcase, read `specs/showcase.md`.
 - **Shared package consumption:** Sub-agents import from `@notabhay-ui/ui` — these packages must be built by the main agent BEFORE spawning.
 - **Build verification:** Each sub-agent runs `bun run build` in its template directory as the last step.
 - **No global installs:** Sub-agents do NOT run `bun install`. The main agent runs it once at the root after creating all package.json stubs (Phase 1 step 8).
-- **Font installs are the exception:** Sub-agents CAN run `bun add @fontsource/...` inside their template directory to install Fontsource packages. This is safe because the workspace already exists.
+- **Template-specific deps:** Sub-agents CAN run `bun add` inside their template directory to install Fontsource packages and any template-specific deps mentioned in their spec (e.g., `cmdk` for Neon). This is safe because the workspace already exists.
 - **If a sub-agent fails:** The main agent should review the error and fix it. Don't re-spawn the agent.
 - **Opus enforcement:** Claude Code may default sub-agents/teammates to Sonnet for cost reasons. If Agent Teams has a model setting, explicitly set it to Opus for every spawned agent. The prompt instruction alone may not be enough — check your Claude Code settings.
 

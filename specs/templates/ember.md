@@ -17,17 +17,17 @@
 | background     | #09090b | #faf9f6 |
 | foreground     | #fafaf9 | #09090b |
 | primary (gold) | #d4a574 | #92400e |
-| primary-fg     | #09090b | #ffffff |
+| primary-foreground     | #09090b | #ffffff |
 | secondary      | #27272a | #f0ebe4 |
-| secondary-fg   | #fafaf9 | #09090b |
+| secondary-foreground   | #fafaf9 | #09090b |
 | muted          | #18181b | #f5f0eb |
-| muted-fg       | #a1a1aa | #78716c |
+| muted-foreground       | #a1a1aa | #78716c |
 | accent         | #d4a574 | #92400e |
-| accent-fg      | #09090b | #ffffff |
+| accent-foreground      | #09090b | #ffffff |
 | destructive    | #ef4444 | #dc2626 |
 | border         | #27272a | #d6cec4 |
 | card           | #0f0f11 | #faf9f6 |
-| card-fg        | #fafaf9 | #09090b |
+| card-foreground        | #fafaf9 | #09090b |
 | ring           | #d4a574 | #92400e |
 
 **Accessibility note:** Light mode gold darkened to `#92400e` for AA compliance. Light muted and border adjusted for better surface differentiation.

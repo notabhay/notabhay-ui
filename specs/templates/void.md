@@ -15,19 +15,19 @@
 | background       | #0a0a0a | #fafafa |
 | foreground       | #fafafa | #0a0a0a |
 | primary          | #3b82f6 | #3b82f6 |
-| primary-fg       | #ffffff | #ffffff |
+| primary-foreground       | #ffffff | #ffffff |
 | secondary        | #18181b | #f5f5f5 |
-| secondary-fg     | #fafafa | #0a0a0a |
+| secondary-foreground     | #fafafa | #0a0a0a |
 | muted            | #18181b | #f5f5f5 |
 | muted-foreground | #a1a1aa | #737373 |
 | accent           | #18181b | #f5f5f5 |
-| accent-fg        | #fafafa | #0a0a0a |
+| accent-foreground        | #fafafa | #0a0a0a |
 | destructive      | #ef4444 | #dc2626 |
 | border           | #27272a | #e4e4e7 |
 | input            | #27272a | #e4e4e7 |
 | ring             | #3b82f6 | #3b82f6 |
 | card             | #0f0f0f | #ffffff |
-| card-fg          | #fafafa | #0a0a0a |
+| card-foreground          | #fafafa | #0a0a0a |
 
 ---
 
