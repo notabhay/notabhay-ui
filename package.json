@@ -1,0 +1,22 @@
+{
+  "name": "notabhay-ui",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "templates/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "bun run build:packages && bun run --filter '*' --filter '!@notabhay-ui/tokens' --filter '!@notabhay-ui/ui' build",
+    "dev": "bun run --filter '*' dev",
+    "lint": "bun run --filter '*' lint",
+    "build:packages": "bun run --filter '@notabhay-ui/tokens' build && bun run --filter '@notabhay-ui/ui' build"
+  },
+  "devDependencies": {
+    "typescript": "^5.7",
+    "eslint": "^9.0",
+    "@eslint/js": "^9.0",
+    "typescript-eslint": "^8.0",
+    "globals": "^15.0"
+  }
+}

@@ -1,0 +1,260 @@
+@import "tailwindcss";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+
+:root {
+  --font-heading: "Cormorant Garamond", "Georgia", serif;
+  --font-body: "Inter", "Helvetica Neue", sans-serif;
+  --radius: 0.5rem;
+
+  /* Light mode: warm cream/stone palette with deep gold accent */
+  --background: oklch(0.982 0.005 84);
+  --foreground: oklch(0.145 0.005 286);
+  --card: oklch(0.982 0.005 84);
+  --card-foreground: oklch(0.145 0.005 286);
+  --popover: oklch(0.982 0.005 84);
+  --popover-foreground: oklch(0.145 0.005 286);
+  --primary: oklch(0.447 0.114 52);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.94 0.012 74);
+  --secondary-foreground: oklch(0.145 0.005 286);
+  --muted: oklch(0.959 0.01 74);
+  --muted-foreground: oklch(0.553 0.015 56);
+  --accent: oklch(0.447 0.114 52);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.577 0.245 27.3);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.86 0.015 74);
+  --input: oklch(0.86 0.015 74);
+  --ring: oklch(0.447 0.114 52);
+
+  /* Chart tokens: derived from core palette */
+  --chart-1: oklch(0.447 0.114 52);
+  --chart-2: oklch(0.94 0.062 74);
+  --chart-3: oklch(0.447 0.114 52);
+  --chart-4: oklch(0.694 0.063 63);
+  --chart-5: oklch(0.553 0.015 56);
+
+  /* Sidebar tokens: derived from secondary/primary */
+  --sidebar: oklch(0.94 0.012 74);
+  --sidebar-foreground: oklch(0.145 0.005 286);
+  --sidebar-primary: oklch(0.447 0.114 52);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.447 0.114 52);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.86 0.015 74);
+  --sidebar-ring: oklch(0.447 0.114 52);
+}
+
+.dark {
+  --background: oklch(0.145 0.005 286);
+  --foreground: oklch(0.985 0.002 106);
+  --card: oklch(0.16 0.005 286);
+  --card-foreground: oklch(0.985 0.002 106);
+  --popover: oklch(0.16 0.005 286);
+  --popover-foreground: oklch(0.985 0.002 106);
+  --primary: oklch(0.756 0.088 72);
+  --primary-foreground: oklch(0.145 0.005 286);
+  --secondary: oklch(0.278 0.006 285.8);
+  --secondary-foreground: oklch(0.985 0.002 106);
+  --muted: oklch(0.21 0.006 285.8);
+  --muted-foreground: oklch(0.708 0.013 286);
+  --accent: oklch(0.756 0.088 72);
+  --accent-foreground: oklch(0.145 0.005 286);
+  --destructive: oklch(0.637 0.237 25.3);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.278 0.006 285.8);
+  --input: oklch(0.278 0.006 285.8);
+  --ring: oklch(0.756 0.088 72);
+
+  /* Chart tokens */
+  --chart-1: oklch(0.756 0.088 72);
+  --chart-2: oklch(0.278 0.056 285.8);
+  --chart-3: oklch(0.756 0.088 72);
+  --chart-4: oklch(0.517 0.047 178.9);
+  --chart-5: oklch(0.708 0.013 286);
+
+  /* Sidebar tokens */
+  --sidebar: oklch(0.278 0.006 285.8);
+  --sidebar-foreground: oklch(0.985 0.002 106);
+  --sidebar-primary: oklch(0.756 0.088 72);
+  --sidebar-primary-foreground: oklch(0.145 0.005 286);
+  --sidebar-accent: oklch(0.756 0.088 72);
+  --sidebar-accent-foreground: oklch(0.145 0.005 286);
+  --sidebar-border: oklch(0.278 0.006 285.8);
+  --sidebar-ring: oklch(0.756 0.088 72);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+/* ── Grain overlay ─────────────────────────────────────────────── */
+/* SVG feTurbulence noise texture applied globally for luxury feel */
+
+.grain-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+.dark .grain-overlay::before {
+  opacity: 0.04;
+}
+
+/* ── Gold rule divider ─────────────────────────────────────────── */
+.gold-rule {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary) 20%,
+    var(--primary) 80%,
+    transparent
+  );
+  opacity: 0.4;
+}
+
+/* ── Luxurious transitions ─────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .ember-fade-in {
+    animation: emberFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .ember-slide-up {
+    animation: emberSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes emberFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes emberSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ── Subtle card grain ─────────────────────────────────────────── */
+.card-grain {
+  position: relative;
+}
+
+.card-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* ── Warm gradient backgrounds ─────────────────────────────────── */
+.warm-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--background) 0%,
+    var(--muted) 50%,
+    var(--background) 100%
+  );
+}
+
+/* ── Gold top-border accent for cards ──────────────────────────── */
+.gold-accent-top {
+  border-top: 2px solid var(--primary);
+}
+
+/* ── Custom scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* ── Bar chart styling ─────────────────────────────────────────── */
+.bar-chart-bar {
+  background: linear-gradient(
+    180deg,
+    var(--primary) 0%,
+    var(--primary) 70%,
+    var(--accent) 100%
+  );
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bar-chart-bar:hover {
+  opacity: 0.85;
+}
