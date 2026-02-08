@@ -63,7 +63,7 @@
 
 ## Visual Signature
 
-- Command palette (⌘K via cmdk) is first-class
+- Command palette (⌘K via cmdk) is first-class. **Note:** `cmdk` is NOT in the base template `package.json` pattern. Install it: `bun add cmdk` inside `templates/neon/`
 - Blinking cursor on hero heading (CSS only)
 - Terminal-style metrics section
 - 2px colored left-border accent on cards

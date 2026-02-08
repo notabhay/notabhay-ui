@@ -41,6 +41,44 @@ Small footer with "Built with shadcn/ui + Tailwind v4 + Vite + React 19" in mute
 
 ---
 
+## Showcase `package.json`
+
+```json
+{
+  "name": "@notabhay-ui/showcase",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "tsc -b && vite build",
+    "lint": "eslint src/",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.0.0",
+    "@fontsource/space-grotesk": "^5.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "motion": "^12.0.0",
+    "lucide-react": "^0.400.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}
+```
+
+**Note:** Showcase does NOT depend on `@notabhay-ui/ui` or `@notabhay-ui/tokens`. It's a standalone page with its own neutral styling. Use the same `vite.config.ts`, `tsconfig.json`, `tsconfig.app.json`, and `tsconfig.node.json` patterns from `specs/architecture.md` (with port 3000).
+
+---
+
 ## Template Metadata
 
 | Slug      | Name         | Description                          | Port |
