@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { ExternalLink, X, Monitor } from "lucide-react";
+import { motion } from "motion/react";
+import { ExternalLink } from "lucide-react";
 
 interface Template {
   slug: string;
   name: string;
   description: string;
-  port: number;
+  url: string;
   background: string;
   primary: string;
 }
@@ -16,7 +15,7 @@ const templates: Template[] = [
     slug: "void",
     name: "Void",
     description: "Minimal Dark",
-    port: 3001,
+    url: "https://notabhay-ui-preview-void.vercel.app",
     background: "oklch(0.145 0 0)",
     primary: "oklch(0.623 0.214 259.1)",
   },
@@ -24,7 +23,7 @@ const templates: Template[] = [
     slug: "neon",
     name: "Neon",
     description: "Cyberpunk/Terminal",
-    port: 3002,
+    url: "https://notabhay-ui-preview-neon.vercel.app",
     background: "oklch(0.16 0.015 284)",
     primary: "oklch(0.789 0.154 194.8)",
   },
@@ -32,7 +31,7 @@ const templates: Template[] = [
     slug: "brutalist",
     name: "Brutalist",
     description: "Raw/Industrial",
-    port: 3003,
+    url: "https://notabhay-ui-preview-brutalist.vercel.app",
     background: "oklch(0.22 0 0)",
     primary: "oklch(0.577 0.245 27.3)",
   },
@@ -40,7 +39,7 @@ const templates: Template[] = [
     slug: "bloom",
     name: "Bloom",
     description: "Soft/Organic",
-    port: 3004,
+    url: "https://notabhay-ui-preview-bloom.vercel.app",
     background: "oklch(0.2 0.012 340)",
     primary: "oklch(0.718 0.18 349)",
   },
@@ -48,7 +47,7 @@ const templates: Template[] = [
     slug: "editorial",
     name: "Editorial",
     description: "Print/Magazine",
-    port: 3005,
+    url: "https://notabhay-ui-preview-editorial.vercel.app",
     background: "oklch(0.216 0.006 56)",
     primary: "oklch(0.714 0.185 305)",
   },
@@ -56,7 +55,7 @@ const templates: Template[] = [
     slug: "glass",
     name: "Glass",
     description: "Glassmorphism",
-    port: 3006,
+    url: "https://notabhay-ui-preview-glass.vercel.app",
     background: "oklch(0.178 0.029 284)",
     primary: "oklch(0.672 0.176 277)",
   },
@@ -64,7 +63,7 @@ const templates: Template[] = [
     slug: "swiss",
     name: "Swiss",
     description: "International/Grid",
-    port: 3007,
+    url: "https://notabhay-ui-preview-swiss.vercel.app",
     background: "oklch(0.175 0 0)",
     primary: "oklch(0.628 0.258 29.2)",
   },
@@ -72,7 +71,7 @@ const templates: Template[] = [
     slug: "ember",
     name: "Ember",
     description: "Dark Luxury",
-    port: 3008,
+    url: "https://notabhay-ui-preview-ember.vercel.app",
     background: "oklch(0.145 0.005 286)",
     primary: "oklch(0.756 0.088 72)",
   },
@@ -80,7 +79,7 @@ const templates: Template[] = [
     slug: "candy",
     name: "Candy",
     description: "Playful/Bold",
-    port: 3009,
+    url: "https://notabhay-ui-preview-candy.vercel.app",
     background: "oklch(0.19 0.04 300)",
     primary: "oklch(0.627 0.265 303.9)",
   },
@@ -89,16 +88,10 @@ const templates: Template[] = [
 function TemplateCard({
   template,
   index,
-  activePreview,
-  onTogglePreview,
 }: {
   template: Template;
   index: number;
-  activePreview: string | null;
-  onTogglePreview: (slug: string) => void;
 }) {
-  const isPreviewActive = activePreview === template.slug;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -107,7 +100,7 @@ function TemplateCard({
       className="group relative"
     >
       <a
-        href={`http://localhost:${template.port}`}
+        href={template.url}
         target="_blank"
         rel="noopener noreferrer"
         className="block rounded-lg border border-white/[0.08] bg-white/[0.03] overflow-hidden transition-all duration-200 hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
@@ -126,33 +119,19 @@ function TemplateCard({
           className="relative h-32 overflow-hidden"
           style={{ backgroundColor: template.background }}
         >
-          {isPreviewActive ? (
-            <iframe
-              src={`http://localhost:${template.port}`}
-              title={`${template.name} preview`}
-              loading="lazy"
-              className="absolute inset-0 w-full h-full border-0 pointer-events-none"
-              style={{ transform: "scale(0.5)", transformOrigin: "top left", width: "200%", height: "200%" }}
-            />
-          ) : (
-            <>
-              <div
-                className="absolute inset-0 opacity-30"
-                style={{
-                  background: `radial-gradient(ellipse at 70% 50%, ${template.primary}, transparent 70%)`,
-                }}
-              />
-              <div
-                className="absolute bottom-3 right-3 w-8 h-8 rounded-md"
-                style={{ backgroundColor: template.primary }}
-              />
-              <div
-                className="absolute bottom-3 right-14 w-16 h-2 rounded-full opacity-40"
-                style={{ backgroundColor: template.primary }}
-              />
-              <div className="absolute bottom-7 right-14 w-10 h-2 rounded-full opacity-20 bg-white" />
-            </>
-          )}
+          <iframe
+            src={template.url}
+            title={`${template.name} preview`}
+            loading="eager"
+            className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+            style={{ transform: "scale(0.5)", transformOrigin: "top left", width: "200%", height: "200%" }}
+          />
+          <div
+            className="absolute inset-0 opacity-10 pointer-events-none"
+            style={{
+              background: `radial-gradient(ellipse at 70% 50%, ${template.primary}, transparent 70%)`,
+            }}
+          />
           <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
             <ExternalLink className="w-4 h-4 text-white/60" />
           </div>
@@ -164,45 +143,16 @@ function TemplateCard({
             <h3 className="font-heading text-base font-semibold text-[#fafafa]">
               {template.name}
             </h3>
-            <span className="text-xs text-white/30 font-mono">:{template.port}</span>
+            <span className="text-xs text-white/30 font-mono">live</span>
           </div>
           <p className="mt-1 text-sm text-white/50">{template.description}</p>
         </div>
       </a>
-
-      {/* Live preview toggle */}
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onTogglePreview(template.slug);
-        }}
-        className="absolute top-2 left-2 z-10 flex items-center gap-1 rounded-md bg-black/60 backdrop-blur-sm px-2 py-1 text-[10px] text-white/60 hover:text-white/90 hover:bg-black/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-        aria-label={isPreviewActive ? "Close live preview" : "Open live preview"}
-      >
-        {isPreviewActive ? (
-          <>
-            <X className="w-3 h-3" />
-            Close
-          </>
-        ) : (
-          <>
-            <Monitor className="w-3 h-3" />
-            Preview
-          </>
-        )}
-      </button>
     </motion.div>
   );
 }
 
 export default function App() {
-  const [activePreview, setActivePreview] = useState<string | null>(null);
-
-  function handleTogglePreview(slug: string) {
-    setActivePreview((prev) => (prev === slug ? null : slug));
-  }
-
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#fafafa] font-body">
       {/* Header */}
@@ -224,19 +174,6 @@ export default function App() {
           9 opinionated UI templates. Same components, same data, 9 radically
           different presentations.
         </motion.p>
-
-        <AnimatePresence>
-          {activePreview && (
-            <motion.p
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mt-3 text-xs text-white/30"
-            >
-              Start the template&apos;s dev server first for live preview.
-            </motion.p>
-          )}
-        </AnimatePresence>
       </header>
 
       {/* Grid */}
@@ -247,8 +184,6 @@ export default function App() {
               key={template.slug}
               template={template}
               index={i}
-              activePreview={activePreview}
-              onTogglePreview={handleTogglePreview}
             />
           ))}
         </div>
