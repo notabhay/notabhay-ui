@@ -8,14 +8,27 @@ test.describe("showcase", () => {
     await expect(page.getByRole("link")).toHaveCount(9);
   });
 
-  test("live preview toggle can open and close", async ({ page }) => {
+  test("cards use live deployed previews and external links", async ({ page }) => {
     await page.goto("http://localhost:3000/");
 
-    const previewButton = page.getByRole("button", { name: /open live preview/i }).first();
-    await previewButton.click();
-    await expect(page.getByText("Start the template's dev server first for live preview.")).toBeVisible();
+    await expect(page.getByRole("button", { name: /open live preview/i })).toHaveCount(0);
+    await expect(page.getByText("Start the template's dev server first for live preview.")).toHaveCount(0);
+    await expect(page.locator("iframe")).toHaveCount(9);
 
-    await page.getByRole("button", { name: /close live preview/i }).first().click();
-    await expect(page.getByText("Start the template's dev server first for live preview.")).not.toBeVisible();
+    const links = page.getByRole("link");
+    for (let i = 0; i < 9; i += 1) {
+      const link = links.nth(i);
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("href", /^https:\/\/notabhay-ui-preview-[a-z]+\.vercel\.app\/?$/);
+      await expect(link).not.toHaveAttribute("href", /localhost/);
+    }
+
+    const previewFrames = page.locator("iframe");
+    for (let i = 0; i < 9; i += 1) {
+      await expect(previewFrames.nth(i)).toHaveAttribute(
+        "src",
+        /^https:\/\/notabhay-ui-preview-[a-z]+\.vercel\.app\/?$/
+      );
+    }
   });
 });
