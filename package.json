@@ -7,18 +7,31 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "bun run build:packages && bun run --filter '*' --filter '!@notabhay-ui/tokens' --filter '!@notabhay-ui/ui' build",
+    "build": "bun run build:packages && bash scripts/build-apps.sh",
     "dev": "bun run --filter '*' dev",
     "lint": "bun run --filter '*' lint",
-    "build:packages": "bun run --filter '@notabhay-ui/tokens' build && bun run --filter '@notabhay-ui/ui' build"
+    "build:packages": "bun run --cwd packages/tokens build && bun run --cwd packages/ui build",
+    "typecheck": "bash scripts/typecheck-all.sh",
+    "check:bundle": "bun scripts/check-bundle-budgets.mjs",
+    "test": "bun run test:unit && bun run test:e2e",
+    "test:unit": "vitest run --config vitest.config.ts",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "ci:quick": "bun run lint && bun run typecheck && bun run build && bun run check:bundle && bun run test:unit",
+    "ci": "bun run ci:quick && bun run test:e2e"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
     "@eslint/js": "^9.0",
     "@playwright/test": "^1.58.2",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
     "eslint": "^9.0",
     "globals": "^15.0",
+    "jsdom": "^26.1.0",
     "playwright": "^1.58.2",
     "typescript": "^5.7",
-    "typescript-eslint": "^8.0"
+    "typescript-eslint": "^8.0",
+    "vitest": "^3.2.4"
   }
 }

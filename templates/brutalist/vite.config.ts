@@ -1,48 +1,43 @@
-import path from "node:path";
-import fs from "node:fs";
-import { fileURLToPath } from "node:url";
+import path from "path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const templateSrc = path.resolve(__dirname, "./src");
-const uiSrc = path.resolve(__dirname, "../../packages/ui/src");
+function manualChunks(id: string): string | undefined {
+  if (!id.includes("node_modules")) return undefined;
 
-function tryResolve(base: string, target: string): string | null {
-  const full = path.resolve(base, target);
-  const extensions = ["", ".ts", ".tsx", ".js", ".jsx"];
-  for (const ext of extensions) {
-    const candidate = full + ext;
-    if (fs.existsSync(candidate)) return candidate;
+  if (
+    id.includes("react/") ||
+    id.includes("react-dom") ||
+    id.includes("react-router") ||
+    id.includes("scheduler")
+  ) {
+    return "vendor-react";
   }
-  // Try index files
-  for (const ext of extensions) {
-    const candidate = path.join(full, "index" + ext);
-    if (fs.existsSync(candidate)) return candidate;
+
+  if (
+    id.includes("motion") ||
+    id.includes("lucide-react") ||
+    id.includes("@radix-ui") ||
+    id.includes("class-variance-authority") ||
+    id.includes("clsx") ||
+    id.includes("tailwind-merge") ||
+    id.includes("sonner") ||
+    id.includes("cmdk")
+  ) {
+    return "vendor-ui";
   }
-  return null;
+
+  return "vendor-misc";
 }
 
 export default defineConfig({
-  plugins: [
-    {
-      name: "resolve-at-alias",
-      enforce: "pre",
-      resolveId(source, importer) {
-        if (!source.startsWith("@/") || !importer) return null;
-        const relative = source.slice(2);
-        // If the importer is within packages/ui, resolve @/ relative to packages/ui/src
-        if (importer.includes("packages/ui")) {
-          return tryResolve(uiSrc, relative);
-        }
-        // Otherwise resolve to the template's src
-        return tryResolve(templateSrc, relative);
-      },
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
-    react(),
-    tailwindcss(),
-  ],
+  },
   server: {
     port: 3003,
   },
@@ -51,5 +46,11 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
+    chunkSizeWarningLimit: 350,
+    rollupOptions: {
+      output: {
+        manualChunks,
+      },
+    },
   },
 });

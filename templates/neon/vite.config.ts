@@ -2,41 +2,42 @@ import path from "path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import type { Plugin } from "vite";
 
-const templateSrcDir = path.resolve(__dirname, "./src");
-const uiSrcDir = path.resolve(__dirname, "../../packages/ui/src");
+function manualChunks(id: string): string | undefined {
+  if (!id.includes("node_modules")) return undefined;
 
-/**
- * Resolves @/ imports context-aware: files inside packages/ui use ui's src,
- * files inside this template use the template's src.
- */
-function contextAwareAliasPlugin(): Plugin {
-  return {
-    name: "context-aware-alias",
-    enforce: "pre",
-    resolveId(source, importer) {
-      if (!source.startsWith("@/")) return null;
-      if (!importer) return null;
+  if (
+    id.includes("react/") ||
+    id.includes("react-dom") ||
+    id.includes("react-router") ||
+    id.includes("scheduler")
+  ) {
+    return "vendor-react";
+  }
 
-      const normalizedImporter = importer.replace(/\\/g, "/");
-      const relativePart = source.slice(2);
+  if (
+    id.includes("motion") ||
+    id.includes("lucide-react") ||
+    id.includes("@radix-ui") ||
+    id.includes("class-variance-authority") ||
+    id.includes("clsx") ||
+    id.includes("tailwind-merge") ||
+    id.includes("sonner") ||
+    id.includes("cmdk")
+  ) {
+    return "vendor-ui";
+  }
 
-      // If the importer is inside packages/ui, resolve to ui's src dir
-      if (normalizedImporter.includes("/packages/ui/")) {
-        const resolved = path.resolve(uiSrcDir, relativePart);
-        return this.resolve(resolved, importer, { skipSelf: true });
-      }
-
-      // Otherwise resolve to the template's src dir
-      const resolved = path.resolve(templateSrcDir, relativePart);
-      return this.resolve(resolved, importer, { skipSelf: true });
-    },
-  };
+  return "vendor-misc";
 }
 
 export default defineConfig({
-  plugins: [contextAwareAliasPlugin(), react(), tailwindcss()],
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   server: {
     port: 3002,
   },
@@ -45,5 +46,11 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
+    chunkSizeWarningLimit: 350,
+    rollupOptions: {
+      output: {
+        manualChunks,
+      },
+    },
   },
 });

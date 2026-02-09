@@ -14,9 +14,7 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*", "../../packages/ui/src/*"],
-      "react": ["./node_modules/@types/react"],
-      "react/jsx-runtime": ["./node_modules/@types/react/jsx-runtime"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"]
