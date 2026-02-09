@@ -59,3 +59,44 @@ For each app deployment target:
 ## CI Compatibility
 
 Use `.github/workflows/ci.yml` as the canonical quality gate. It runs lint, typecheck, build, bundle budget checks, unit tests, and smoke E2E.
+
+## Vercel (Showcase)
+
+The repository includes a production deploy workflow for the showcase app at `.github/workflows/deploy-vercel-showcase.yml`.
+
+### One-time setup
+
+1. Install and authenticate Vercel CLI:
+
+```bash
+npm install --global vercel@latest
+vercel login
+```
+
+2. Link the showcase app to a Vercel project:
+
+```bash
+cd apps/showcase
+vercel link
+```
+
+3. Create a Vercel token (Dashboard -> Settings -> Tokens) and add these GitHub repository secrets:
+   - `VERCEL_TOKEN`
+   - `VERCEL_ORG_ID`
+   - `VERCEL_PROJECT_ID_SHOWCASE`
+
+4. Get `orgId` and `projectId` from `apps/showcase/.vercel/project.json` after linking.
+
+### Deployment triggers
+
+- Automatic: publish a GitHub release with a tag that starts with `v` (for example, `v0.0.2`).
+- Manual: run the `Deploy Showcase to Vercel` workflow from the GitHub Actions UI.
+
+### Local CLI deploy (optional)
+
+```bash
+cd apps/showcase
+vercel pull --yes --environment=production
+vercel build --prod
+vercel deploy --prebuilt --prod
+```

@@ -48,6 +48,8 @@ bun run ci
 
 See `docs/deployment.md` for production deployment guidance, SPA routing fallback rules, and host-specific examples.
 
+Vercel production deploy workflow for showcase: `.github/workflows/deploy-vercel-showcase.yml`.
+
 ## CI
 
 GitHub Actions workflow is at `.github/workflows/ci.yml` and runs:
