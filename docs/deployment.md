@@ -58,4 +58,4 @@ For each app deployment target:
 
 ## CI Compatibility
 
-Use `.github/workflows/ci.yml` as the canonical quality gate. It runs lint, typecheck, build, bundle budget checks, unit tests, and E2E.
+Use `.github/workflows/ci.yml` as the canonical quality gate. It runs lint, typecheck, build, bundle budget checks, unit tests, and smoke E2E.

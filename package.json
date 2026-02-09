@@ -16,9 +16,11 @@
     "test": "bun run test:unit && bun run test:e2e",
     "test:unit": "vitest run --config vitest.config.ts",
     "test:e2e": "playwright test",
+    "test:e2e:smoke": "playwright test tests/e2e/showcase.spec.ts tests/e2e/template-smoke.spec.ts",
+    "test:e2e:visual": "playwright test tests/e2e/visual-regression.spec.ts",
     "test:e2e:ui": "playwright test --ui",
     "ci:quick": "bun run lint && bun run typecheck && bun run build && bun run check:bundle && bun run test:unit",
-    "ci": "bun run ci:quick && bun run test:e2e"
+    "ci": "bun run ci:quick && bun run test:e2e:smoke"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

@@ -25,6 +25,8 @@ bun run build
 bun run check:bundle
 bun run test:unit
 bun run test:e2e
+bun run test:e2e:smoke
+bun run test:e2e:visual
 ```
 
 Run all local CI checks:
@@ -54,4 +56,4 @@ GitHub Actions workflow is at `.github/workflows/ci.yml` and runs:
 - build
 - bundle budget checks
 - unit tests
-- E2E (including visual regression)
+- smoke E2E checks
