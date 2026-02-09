@@ -92,7 +92,7 @@ export default function Home() {
 
           {/* Decorative gradient orb */}
           <div
-            className="pointer-events-none absolute -top-32 right-0 h-96 w-96 rounded-full opacity-[0.03]"
+            className="pointer-events-none absolute -top-32 right-0 h-96 w-96 rounded-full opacity-[0.06]"
             style={{
               background:
                 "radial-gradient(circle, var(--primary) 0%, transparent 70%)",

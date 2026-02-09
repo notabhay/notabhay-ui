@@ -128,14 +128,15 @@ export default function Signup() {
   );
 
   return (
-    <div className="flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-12">
-      <FadeIn>
+    <div className="relative flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-12">
+      <div className="absolute inset-0 void-dot-grid void-fade-mask opacity-30" />
+      <FadeIn className="relative">
         <Card className="w-full max-w-sm border border-border shadow-none">
           <CardHeader className="text-center">
             <p className="font-heading text-sm font-semibold tracking-tight mb-1">
               flux_
             </p>
-            <CardTitle className="font-heading text-lg font-bold">
+            <CardTitle className="font-heading text-lg font-bold tracking-tighter">
               Create account
             </CardTitle>
             <p className="text-sm text-muted-foreground mt-1">

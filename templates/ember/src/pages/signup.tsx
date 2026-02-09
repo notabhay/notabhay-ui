@@ -235,7 +235,7 @@ export default function Signup() {
                               strength === "weak" && i === 0
                                 ? "bg-destructive"
                                 : strength === "medium" && i <= 1
-                                  ? "bg-primary/70"
+                                  ? "bg-[oklch(0.7_0.15_60)]"
                                   : strength === "strong"
                                     ? "bg-primary"
                                     : "bg-muted"
@@ -250,7 +250,7 @@ export default function Signup() {
                         strength === "weak"
                           ? "text-destructive"
                           : strength === "medium"
-                            ? "text-primary/70"
+                            ? "text-[oklch(0.7_0.15_60)]"
                             : "text-primary"
                       )}
                     >

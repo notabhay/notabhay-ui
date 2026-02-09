@@ -12,6 +12,12 @@ const navItems = [
   { label: "Login", href: "/login" },
 ];
 
+const springPlayful = {
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 10,
+};
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -23,13 +29,13 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <motion.div
-              whileHover={{ rotate: 15, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="flex items-center justify-center w-8 h-8 rounded-full candy-gradient-bg"
+              whileHover={{ rotate: 20, scale: 1.15 }}
+              transition={springPlayful}
+              className="flex items-center justify-center w-9 h-9 rounded-full candy-gradient-bg candy-glow"
             >
-              <Sparkles className="h-4 w-4 text-white" />
+              <Sparkles className="h-4.5 w-4.5 text-white" />
             </motion.div>
-            <span className="font-heading font-bold text-xl tracking-tight">
+            <span className="font-heading font-extrabold text-xl tracking-tight candy-gradient-text">
               Flux
             </span>
           </Link>
@@ -41,16 +47,16 @@ export function Navbar() {
               return (
                 <Link key={item.href} to={item.href}>
                   <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                    whileHover={{ scale: 1.06, y: -1 }}
+                    whileTap={{ scale: 0.94, rotate: -2 }}
+                    transition={springPlayful}
                   >
                     <span
                       className={cn(
-                        "inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors",
+                        "inline-flex items-center px-4 py-2 rounded-full text-sm font-bold transition-colors",
                         isActive
-                          ? "bg-primary text-primary-foreground candy-glow"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                          ? "candy-gradient-bg text-white candy-glow"
+                          : "text-muted-foreground hover:text-foreground hover:bg-primary/10"
                       )}
                     >
                       {item.label}
@@ -93,7 +99,7 @@ export function Navbar() {
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className="md:hidden overflow-hidden border-t border-border/50"
           >
-            <div className="px-4 py-4 space-y-1">
+            <div className="px-4 py-4 space-y-1.5">
               {navItems.map((item, index) => {
                 const isActive = location.pathname === item.href;
                 return (
@@ -103,8 +109,8 @@ export function Navbar() {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{
                       type: "spring",
-                      stiffness: 300,
-                      damping: 20,
+                      stiffness: 400,
+                      damping: 15,
                       delay: index * 0.05,
                     }}
                   >
@@ -112,10 +118,10 @@ export function Navbar() {
                       to={item.href}
                       onClick={() => setMobileOpen(false)}
                       className={cn(
-                        "block px-4 py-3 rounded-2xl text-sm font-medium transition-colors",
+                        "block px-4 py-3 rounded-2xl text-sm font-bold transition-colors",
                         isActive
-                          ? "bg-primary text-primary-foreground candy-glow"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                          ? "candy-gradient-bg text-white candy-glow"
+                          : "text-muted-foreground hover:text-foreground hover:bg-primary/10"
                       )}
                     >
                       {item.label}

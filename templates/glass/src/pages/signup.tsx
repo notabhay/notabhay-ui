@@ -56,7 +56,7 @@ export default function Signup() {
   const shouldReduceMotion = useReducedMotion();
   const transition = shouldReduceMotion
     ? { duration: 0 }
-    : { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const };
+    : { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const };
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -167,30 +167,32 @@ export default function Signup() {
 
   return (
     <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
-      {/* Background orbs */}
-      <div className="orb orb-1 top-[10%] right-[20%]" aria-hidden="true" />
-      <div className="orb orb-3 bottom-[15%] left-[10%]" aria-hidden="true" />
+      {/* Vivid orbs for maximum glass effect */}
+      <div className="orb orb-1 top-[5%] right-[15%]" aria-hidden="true" />
+      <div className="orb orb-2 bottom-[10%] left-[10%]" aria-hidden="true" />
+      <div className="orb orb-3 top-[40%] left-[60%]" aria-hidden="true" />
+      <div className="orb orb-4 bottom-[25%] right-[30%]" aria-hidden="true" />
 
       <motion.div
-        initial={{ opacity: 0, y: 16, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
+        initial={shouldReduceMotion ? undefined : { opacity: 0, scale: 1.05, filter: "blur(12px)" }}
+        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
         transition={transition}
-        className="relative z-10 w-full max-w-md"
+        className="relative z-10 w-full max-w-lg"
       >
-        <Card className="rounded-2xl">
-          <CardHeader className="text-center">
+        <Card className="rounded-3xl">
+          <CardHeader className="text-center" style={{ borderBottom: "1px solid oklch(1 0 0 / 12%)" }}>
             <div className="flex justify-center mb-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 backdrop-blur-sm">
-                <Zap className="h-6 w-6 text-primary" />
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl glass-subtle glass-pulse">
+                <Zap className="h-7 w-7 text-primary" />
               </div>
             </div>
-            <CardTitle className="text-xl">Create your account</CardTitle>
+            <CardTitle className="text-2xl">Create your account</CardTitle>
             <CardDescription>
               Get started with Flux in seconds
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+          <CardContent className="pt-6">
+            <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               {/* Full name */}
               <div className="space-y-1.5">
                 <label
@@ -282,7 +284,7 @@ export default function Signup() {
                 {/* Strength indicator */}
                 {strength && (
                   <div id="password-strength" className="space-y-1">
-                    <div className="h-1 rounded-full bg-muted overflow-hidden">
+                    <div className="h-1.5 rounded-full overflow-hidden glass-subtle">
                       <div
                         className={cn(
                           "h-full rounded-full transition-all duration-300",
@@ -351,7 +353,7 @@ export default function Signup() {
                 )}
               </div>
 
-              <Button type="submit" className="w-full rounded-xl">
+              <Button type="submit" className="w-full rounded-2xl glass-shimmer">
                 Create account
               </Button>
             </form>

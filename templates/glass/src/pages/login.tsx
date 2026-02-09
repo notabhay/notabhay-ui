@@ -22,7 +22,7 @@ export default function Login() {
   const shouldReduceMotion = useReducedMotion();
   const transition = shouldReduceMotion
     ? { duration: 0 }
-    : { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const };
+    : { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -75,28 +75,30 @@ export default function Login() {
 
   return (
     <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
-      {/* Background orbs */}
-      <div className="orb orb-1 top-[20%] left-[15%]" aria-hidden="true" />
-      <div className="orb orb-2 bottom-[20%] right-[15%]" aria-hidden="true" />
+      {/* Vivid orbs for maximum glass effect */}
+      <div className="orb orb-1 top-[10%] left-[15%]" aria-hidden="true" />
+      <div className="orb orb-2 bottom-[15%] right-[10%]" aria-hidden="true" />
+      <div className="orb orb-3 top-[50%] left-[55%]" aria-hidden="true" />
+      <div className="orb orb-4 bottom-[30%] left-[30%]" aria-hidden="true" />
 
       <motion.div
-        initial={{ opacity: 0, y: 16, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
+        initial={shouldReduceMotion ? undefined : { opacity: 0, scale: 1.05, filter: "blur(12px)" }}
+        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
         transition={transition}
-        className="relative z-10 w-full max-w-md"
+        className="relative z-10 w-full max-w-lg"
       >
-        <Card className="rounded-2xl">
-          <CardHeader className="text-center">
+        <Card className="rounded-3xl">
+          <CardHeader className="text-center" style={{ borderBottom: "1px solid oklch(1 0 0 / 12%)" }}>
             <div className="flex justify-center mb-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 backdrop-blur-sm">
-                <Zap className="h-6 w-6 text-primary" />
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl glass-subtle glass-pulse">
+                <Zap className="h-7 w-7 text-primary" />
               </div>
             </div>
-            <CardTitle className="text-xl">Welcome back</CardTitle>
+            <CardTitle className="text-2xl">Welcome back</CardTitle>
             <CardDescription>Sign in to your Flux account</CardDescription>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+          <CardContent className="pt-6">
+            <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               {/* Email */}
               <div className="space-y-1.5">
                 <label
@@ -180,7 +182,7 @@ export default function Login() {
                 </label>
               </div>
 
-              <Button type="submit" className="w-full rounded-xl">
+              <Button type="submit" className="w-full rounded-2xl glass-shimmer">
                 Sign in
               </Button>
             </form>

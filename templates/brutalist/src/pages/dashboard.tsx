@@ -62,7 +62,7 @@ export default function Dashboard() {
                   <p className="font-heading text-4xl font-bold">{stat.value}</p>
                   <div
                     className={`flex items-center gap-1 font-heading text-sm ${
-                      stat.trend === "up" ? "text-primary" : "text-secondary"
+                      stat.trend === "up" ? "text-primary" : "text-muted-foreground"
                     }`}
                   >
                     {stat.trend === "up" ? (
@@ -81,7 +81,7 @@ export default function Dashboard() {
 
       {/* Chart + Table grid */}
       <div className="grid grid-cols-1 xl:grid-cols-[1fr_2fr] gap-0 mt-0">
-        {/* Bar Chart */}
+        {/* Bar Chart — hatched bars */}
         <motion.div
           {...motionConfig}
           transition={{ duration: 0.15, delay: 0.2, ease: "linear" }}
@@ -104,9 +104,10 @@ export default function Dashboard() {
                     </span>
                     <div className="w-full relative" style={{ height: "140px" }}>
                       <div
-                        className="absolute bottom-0 w-full bg-primary border-2 border-foreground transition-all duration-150"
+                        className="absolute bottom-0 w-full border-2 border-foreground"
                         style={{
                           height: `${(day.count / maxDeploys) * 100}%`,
+                          backgroundImage: `repeating-linear-gradient(45deg, var(--primary) 0px, var(--primary) 3px, transparent 3px, transparent 6px)`,
                         }}
                       />
                     </div>
@@ -169,7 +170,7 @@ export default function Dashboard() {
                         <span
                           className={`inline-flex items-center gap-2 font-heading text-xs uppercase tracking-wider ${
                             deploy.status === "success"
-                              ? "text-secondary"
+                              ? "text-foreground"
                               : deploy.status === "failed"
                                 ? "text-destructive"
                                 : "text-muted-foreground"
@@ -178,7 +179,7 @@ export default function Dashboard() {
                           <span
                             className={`h-2 w-2 ${
                               deploy.status === "success"
-                                ? "bg-secondary"
+                                ? "bg-foreground"
                                 : deploy.status === "failed"
                                   ? "bg-destructive"
                                   : "bg-muted-foreground"

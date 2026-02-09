@@ -55,7 +55,7 @@ export function Sidebar() {
             className={cn(
               "flex items-center gap-3 w-full rounded-sm px-3 py-2 text-sm transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
               item.active
-                ? "text-sidebar-foreground bg-sidebar-accent"
+                ? "text-primary bg-sidebar-accent"
                 : "text-muted-foreground hover:opacity-80"
             )}
             aria-current={item.active ? "page" : undefined}
@@ -65,6 +65,20 @@ export function Sidebar() {
           </button>
         ))}
       </nav>
+      <div className="border-t border-sidebar-border px-3 py-3">
+        {collapsed ? (
+          <div className="flex justify-center">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
+            <span className="font-heading tracking-tight">v2.4.1</span>
+            <span className="text-muted-foreground/50">//</span>
+            <span>prod</span>
+          </div>
+        )}
+      </div>
     </aside>
   );
 }

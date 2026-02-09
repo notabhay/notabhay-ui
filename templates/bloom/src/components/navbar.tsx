@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
+import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { Button, cn } from "@notabhay-ui/ui";
 import { ThemeToggle } from "./theme-toggle";
@@ -17,7 +18,7 @@ export function Navbar() {
 
   return (
     <nav
-      className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50"
+      className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/60"
       role="navigation"
       aria-label="Main navigation"
     >
@@ -94,31 +95,39 @@ export function Navbar() {
         </div>
 
         {/* Mobile menu */}
-        {mobileOpen && (
-          <div className="md:hidden pb-4 pt-2 space-y-1">
-            {navItems.map((item) => {
-              const isActive =
-                item.href === "/"
-                  ? location.pathname === "/"
-                  : location.pathname.startsWith(item.href);
-              return (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={cn(
-                    "block px-3 py-2 text-sm font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                    isActive
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </div>
-        )}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, type: "spring", stiffness: 200, damping: 25 }}
+              className="md:hidden pb-4 pt-2 space-y-1 overflow-hidden"
+            >
+              {navItems.map((item) => {
+                const isActive =
+                  item.href === "/"
+                    ? location.pathname === "/"
+                    : location.pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      "block px-3 py-2 text-sm font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                      isActive
+                        ? "text-primary bg-primary/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );

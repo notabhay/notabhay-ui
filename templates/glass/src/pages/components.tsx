@@ -31,6 +31,12 @@ import {
   TabsContent,
 } from "@notabhay-ui/ui";
 
+/* Glass card entry: materialize from atmosphere */
+const glassEntry = {
+  initial: { opacity: 0, scale: 1.05, filter: "blur(12px)" },
+  animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
+};
+
 function SectionHeading({
   id,
   title,
@@ -42,7 +48,7 @@ function SectionHeading({
 }) {
   return (
     <div className="space-y-1 mb-6">
-      <h2 id={id} className="font-heading text-xl font-bold scroll-mt-20">
+      <h2 id={id} className="font-heading text-xl scroll-mt-20">
         {title}
       </h2>
       <p className="text-sm text-muted-foreground">{description}</p>
@@ -54,38 +60,46 @@ export default function Components() {
   const shouldReduceMotion = useReducedMotion();
   const transition = shouldReduceMotion
     ? { duration: 0 }
-    : { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
+    : { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const };
 
   const [inputValue, setInputValue] = useState("");
 
   return (
     <div className="relative">
-      {/* Background orbs */}
-      <div className="orb orb-1 top-[10%] left-[5%]" aria-hidden="true" />
-      <div className="orb orb-2 top-[50%] right-[10%]" aria-hidden="true" />
-      <div className="orb orb-3 bottom-[10%] left-[40%]" aria-hidden="true" />
+      {/* Background orbs — scattered throughout for continuous glass effect */}
+      <div className="orb orb-1 top-[5%] left-[5%]" aria-hidden="true" />
+      <div className="orb orb-2 top-[25%] right-[8%]" aria-hidden="true" />
+      <div className="orb orb-3 top-[50%] left-[35%]" aria-hidden="true" />
+      <div className="orb orb-4 top-[75%] right-[15%]" aria-hidden="true" />
+      <div className="orb orb-1 bottom-[5%] left-[50%]" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 space-y-16">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={transition}
         >
-          <h1 className="font-heading text-3xl font-bold">Components</h1>
-          <p className="text-muted-foreground mt-2">
-            All shared components with every variant, size, and state — rendered
+          <h1 className="font-heading text-3xl lg:text-4xl">Components</h1>
+          <p className="text-muted-foreground mt-2 tracking-wide">
+            All shared components with every variant, size, and state &mdash; rendered
             through glass.
           </p>
         </motion.div>
 
         {/* ===== BUTTON ===== */}
-        <section aria-labelledby="button">
+        <motion.section
+          aria-labelledby="button"
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          whileInView={glassEntry.animate}
+          viewport={{ once: true }}
+          transition={transition}
+        >
           <SectionHeading
             id="button"
             title="Button"
             description="Actions and navigation triggers with glass-enhanced styling."
           />
-          <Card className="rounded-xl">
+          <Card className="rounded-2xl">
             <CardContent className="pt-6 space-y-6">
               {/* Variants */}
               <div>
@@ -123,16 +137,22 @@ export default function Components() {
               </div>
             </CardContent>
           </Card>
-        </section>
+        </motion.section>
 
         {/* ===== INPUT ===== */}
-        <section aria-labelledby="input">
+        <motion.section
+          aria-labelledby="input"
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          whileInView={glassEntry.animate}
+          viewport={{ once: true }}
+          transition={transition}
+        >
           <SectionHeading
             id="input"
             title="Input"
             description="Text fields with glass blur and glow focus."
           />
-          <Card className="rounded-xl">
+          <Card className="rounded-2xl">
             <CardContent className="pt-6 space-y-6">
               {/* Default */}
               <div>
@@ -165,16 +185,22 @@ export default function Components() {
               </div>
             </CardContent>
           </Card>
-        </section>
+        </motion.section>
 
         {/* ===== CARD ===== */}
-        <section aria-labelledby="card">
+        <motion.section
+          aria-labelledby="card"
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          whileInView={glassEntry.animate}
+          viewport={{ once: true }}
+          transition={transition}
+        >
           <SectionHeading
             id="card"
             title="Card"
             description="Glass containers with translucent backgrounds and blur."
           />
-          <Card className="rounded-xl">
+          <Card className="rounded-2xl">
             <CardHeader>
               <CardTitle>Glass Card</CardTitle>
               <CardDescription>
@@ -195,22 +221,28 @@ export default function Components() {
               </Button>
             </CardFooter>
           </Card>
-        </section>
+        </motion.section>
 
         {/* ===== DIALOG ===== */}
-        <section aria-labelledby="dialog">
+        <motion.section
+          aria-labelledby="dialog"
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          whileInView={glassEntry.animate}
+          viewport={{ once: true }}
+          transition={transition}
+        >
           <SectionHeading
             id="dialog"
             title="Dialog"
             description="Modal overlays with glass blur and backdrop."
           />
-          <Card className="rounded-xl">
+          <Card className="rounded-2xl">
             <CardContent className="pt-6">
               <Dialog>
                 <DialogTrigger asChild>
                   <Button>Open Dialog</Button>
                 </DialogTrigger>
-                <DialogContent className="rounded-2xl">
+                <DialogContent className="rounded-3xl">
                   <DialogHeader>
                     <DialogTitle>Confirm Action</DialogTitle>
                     <DialogDescription>
@@ -233,16 +265,22 @@ export default function Components() {
               </Dialog>
             </CardContent>
           </Card>
-        </section>
+        </motion.section>
 
         {/* ===== TABLE ===== */}
-        <section aria-labelledby="table">
+        <motion.section
+          aria-labelledby="table"
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          whileInView={glassEntry.animate}
+          viewport={{ once: true }}
+          transition={transition}
+        >
           <SectionHeading
             id="table"
             title="Table"
             description="Data tables rendered through glass surfaces."
           />
-          <Card className="rounded-xl">
+          <Card className="rounded-2xl">
             <CardContent className="pt-6">
               <Table>
                 <TableHeader>
@@ -299,16 +337,22 @@ export default function Components() {
               </Table>
             </CardContent>
           </Card>
-        </section>
+        </motion.section>
 
         {/* ===== BADGE ===== */}
-        <section aria-labelledby="badge">
+        <motion.section
+          aria-labelledby="badge"
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          whileInView={glassEntry.animate}
+          viewport={{ once: true }}
+          transition={transition}
+        >
           <SectionHeading
             id="badge"
             title="Badge"
             description="Status indicators and labels."
           />
-          <Card className="rounded-xl">
+          <Card className="rounded-2xl">
             <CardContent className="pt-6">
               <div className="flex flex-wrap gap-3">
                 <Badge variant="default">Default</Badge>
@@ -318,16 +362,22 @@ export default function Components() {
               </div>
             </CardContent>
           </Card>
-        </section>
+        </motion.section>
 
         {/* ===== TABS ===== */}
-        <section aria-labelledby="tabs">
+        <motion.section
+          aria-labelledby="tabs"
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          whileInView={glassEntry.animate}
+          viewport={{ once: true }}
+          transition={transition}
+        >
           <SectionHeading
             id="tabs"
             title="Tabs"
             description="Tabbed navigation with default and line variants."
           />
-          <Card className="rounded-xl">
+          <Card className="rounded-2xl">
             <CardContent className="pt-6 space-y-8">
               {/* Default variant */}
               <div>
@@ -388,16 +438,22 @@ export default function Components() {
               </div>
             </CardContent>
           </Card>
-        </section>
+        </motion.section>
 
         {/* ===== TOAST ===== */}
-        <section aria-labelledby="toast">
+        <motion.section
+          aria-labelledby="toast"
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          whileInView={glassEntry.animate}
+          viewport={{ once: true }}
+          transition={transition}
+        >
           <SectionHeading
             id="toast"
             title="Toast"
             description="Notification messages triggered by actions."
           />
-          <Card className="rounded-xl">
+          <Card className="rounded-2xl">
             <CardContent className="pt-6">
               <div className="flex flex-wrap gap-3">
                 <Button
@@ -431,7 +487,7 @@ export default function Components() {
               </div>
             </CardContent>
           </Card>
-        </section>
+        </motion.section>
       </div>
     </div>
   );

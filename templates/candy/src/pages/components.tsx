@@ -31,21 +31,36 @@ import {
 } from "@notabhay-ui/ui";
 import { motion } from "motion/react";
 
+const springPlayful = {
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 10,
+};
+
 const springBouncy = {
   type: "spring" as const,
   stiffness: 300,
-  damping: 15,
+  damping: 12,
 };
 
 function SectionHeader({
   id,
   title,
   description,
+  color = "violet",
 }: {
   id: string;
   title: string;
   description: string;
+  color?: "violet" | "pink" | "cyan";
 }) {
+  const textColor =
+    color === "violet"
+      ? "text-primary"
+      : color === "pink"
+        ? "text-secondary"
+        : "text-accent";
+
   return (
     <motion.div
       id={id}
@@ -55,7 +70,7 @@ function SectionHeader({
       transition={springBouncy}
       className="scroll-mt-20"
     >
-      <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-1">
+      <h2 className={`font-heading font-bold text-2xl sm:text-3xl mb-1 ${textColor}`}>
         {title}
       </h2>
       <p className="text-muted-foreground mb-6">{description}</p>
@@ -73,34 +88,34 @@ export default function Components() {
         animate={{ y: 0, opacity: 1 }}
         transition={springBouncy}
       >
-        <Badge variant="secondary" className="rounded-full mb-4 px-3 py-1">
+        <Badge variant="secondary" className="rounded-full mb-4 px-4 py-1.5 font-semibold">
           Component Library
         </Badge>
-        <h1 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight">
+        <h1 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-foreground">
           Components
         </h1>
         <p className="text-muted-foreground mt-2 max-w-xl">
           Every shared component with all variants, sizes, and states.
         </p>
 
-        {/* Quick nav */}
+        {/* Quick nav — colorful pills */}
         <nav className="flex flex-wrap gap-2 mt-6" aria-label="Component sections">
           {[
-            "button",
-            "input",
-            "card",
-            "dialog",
-            "table",
-            "badge",
-            "tabs",
-            "toast",
-          ].map((id) => (
+            { id: "button", color: "bg-primary/10 text-primary hover:bg-primary/20" },
+            { id: "input", color: "bg-secondary/10 text-secondary hover:bg-secondary/20" },
+            { id: "card", color: "bg-accent/10 text-accent hover:bg-accent/20" },
+            { id: "dialog", color: "bg-primary/10 text-primary hover:bg-primary/20" },
+            { id: "table", color: "bg-secondary/10 text-secondary hover:bg-secondary/20" },
+            { id: "badge", color: "bg-accent/10 text-accent hover:bg-accent/20" },
+            { id: "tabs", color: "bg-primary/10 text-primary hover:bg-primary/20" },
+            { id: "toast", color: "bg-secondary/10 text-secondary hover:bg-secondary/20" },
+          ].map((item) => (
             <a
-              key={id}
-              href={`#${id}`}
-              className="px-3 py-1.5 text-xs font-medium rounded-full bg-muted text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-colors"
+              key={item.id}
+              href={`#${item.id}`}
+              className={`px-4 py-1.5 text-xs font-bold rounded-full transition-colors ${item.color}`}
             >
-              {id.charAt(0).toUpperCase() + id.slice(1)}
+              {item.id.charAt(0).toUpperCase() + item.id.slice(1)}
             </a>
           ))}
         </nav>
@@ -111,50 +126,67 @@ export default function Components() {
         <SectionHeader
           id="button"
           title="Button"
-          description="Pill-shaped buttons with gradient fills and bouncy interactions."
+          description="Pill-shaped buttons with gradient fills, shimmer on hover, and bouncy interactions."
+          color="violet"
         />
         <div className="space-y-6">
           <div>
-            <h3 className="text-sm font-semibold text-muted-foreground mb-3">
+            <h3 className="text-sm font-bold text-primary mb-3 uppercase tracking-wide">
               Variants
             </h3>
             <div className="flex flex-wrap gap-3">
-              <Button className="rounded-full candy-gradient-bg text-white border-0 candy-glow">
-                Default
-              </Button>
-              <Button variant="outline" className="rounded-full">
-                Outline
-              </Button>
-              <Button variant="ghost" className="rounded-full">
-                Ghost
-              </Button>
-              <Button variant="destructive" className="rounded-full">
-                Destructive
-              </Button>
-              <Button variant="secondary" className="rounded-full">
-                Secondary
-              </Button>
-              <Button variant="link">Link</Button>
+              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95, rotate: -3 }} transition={springPlayful}>
+                <Button className="rounded-full candy-gradient-bg text-white border-0 candy-glow candy-shimmer font-bold">
+                  Default
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={springPlayful}>
+                <Button variant="outline" className="rounded-full border font-bold">
+                  Outline
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={springPlayful}>
+                <Button variant="ghost" className="rounded-full font-bold">
+                  Ghost
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={springPlayful}>
+                <Button variant="destructive" className="rounded-full font-bold">
+                  Destructive
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={springPlayful}>
+                <Button variant="secondary" className="rounded-full font-bold">
+                  Secondary
+                </Button>
+              </motion.div>
+              <Button variant="link" className="font-bold">Link</Button>
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-muted-foreground mb-3">
+            <h3 className="text-sm font-bold text-secondary mb-3 uppercase tracking-wide">
               Sizes
             </h3>
             <div className="flex flex-wrap items-center gap-3">
-              <Button size="sm" className="rounded-full candy-gradient-bg text-white border-0">
-                Small
-              </Button>
-              <Button className="rounded-full candy-gradient-bg text-white border-0">
-                Default
-              </Button>
-              <Button size="lg" className="rounded-full candy-gradient-bg text-white border-0">
-                Large
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95, rotate: -2 }} transition={springPlayful}>
+                <Button size="sm" className="rounded-full candy-gradient-bg text-white border-0 candy-shimmer font-bold">
+                  Small
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95, rotate: -2 }} transition={springPlayful}>
+                <Button className="rounded-full candy-gradient-bg text-white border-0 candy-shimmer font-bold">
+                  Default
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95, rotate: -2 }} transition={springPlayful}>
+                <Button size="lg" className="rounded-full candy-gradient-bg text-white border-0 candy-glow candy-shimmer font-bold">
+                  Large
+                </Button>
+              </motion.div>
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-muted-foreground mb-3">
+            <h3 className="text-sm font-bold text-accent mb-3 uppercase tracking-wide">
               States
             </h3>
             <div className="flex flex-wrap items-center gap-3">
@@ -167,46 +199,47 @@ export default function Components() {
       </section>
 
       {/* Input Section */}
-      <section>
+      <section className="candy-section-pink rounded-3xl p-8 -mx-4 sm:-mx-6 lg:-mx-8">
         <SectionHeader
           id="input"
           title="Input"
-          description="Rounded inputs with colored focus rings."
+          description="Chunky 2px borders with vivid colored focus rings."
+          color="pink"
         />
         <div className="space-y-6 max-w-md">
           <div>
-            <h3 className="text-sm font-semibold text-muted-foreground mb-3">
+            <h3 className="text-sm font-bold text-secondary mb-3 uppercase tracking-wide">
               Default
             </h3>
             <Input
               placeholder="Enter your email..."
-              className="rounded-full"
+              className="rounded-full candy-input"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-muted-foreground mb-3">
+            <h3 className="text-sm font-bold text-destructive mb-3 uppercase tracking-wide">
               Error State
             </h3>
             <Input
               placeholder="Invalid input"
               aria-invalid="true"
-              className="rounded-full"
+              className="rounded-full candy-input"
               defaultValue="bad-email"
             />
-            <p className="text-xs text-destructive mt-1.5">
+            <p className="text-xs text-destructive mt-1.5 font-medium">
               Please enter a valid email address.
             </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-muted-foreground mb-3">
+            <h3 className="text-sm font-bold text-accent mb-3 uppercase tracking-wide">
               Sizes
             </h3>
             <div className="space-y-3">
-              <Input placeholder="Small" className="rounded-full h-8 text-sm" />
-              <Input placeholder="Default" className="rounded-full" />
-              <Input placeholder="Large" className="rounded-full h-11 text-base" />
+              <Input placeholder="Small" className="rounded-full candy-input h-8 text-sm" />
+              <Input placeholder="Default" className="rounded-full candy-input" />
+              <Input placeholder="Large" className="rounded-full candy-input h-11 text-base" />
             </div>
           </div>
         </div>
@@ -217,17 +250,19 @@ export default function Components() {
         <SectionHeader
           id="card"
           title="Card"
-          description="Rounded cards with colored shadows and playful rotation."
+          description="Rounded cards with VISIBLE rotations, gradient borders, and colored shadows."
+          color="cyan"
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           <motion.div
-            whileHover={{ scale: 1.02, rotate: 0 }}
-            initial={{ rotate: -1 }}
-            transition={springBouncy}
+            whileHover={{ scale: 1.04, rotate: 0, y: -8 }}
+            initial={{ rotate: -3 }}
+            transition={springPlayful}
           >
-            <Card className="candy-glow border-border/50">
+            <Card className="candy-glow border border-primary/40 overflow-hidden candy-gradient-border">
+              <div className="h-1.5 candy-gradient-bg w-full" aria-hidden="true" />
               <CardHeader>
-                <CardTitle className="font-heading font-bold">
+                <CardTitle className="font-heading font-bold text-primary">
                   Analytics Overview
                 </CardTitle>
                 <CardDescription>
@@ -241,24 +276,27 @@ export default function Components() {
                 </p>
               </CardContent>
               <CardFooter>
-                <Button
-                  size="sm"
-                  className="rounded-full candy-gradient-bg text-white border-0"
-                >
-                  View Details
-                </Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95, rotate: -2 }} transition={springPlayful}>
+                  <Button
+                    size="sm"
+                    className="rounded-full candy-gradient-bg text-white border-0 candy-shimmer font-bold"
+                  >
+                    View Details
+                  </Button>
+                </motion.div>
               </CardFooter>
             </Card>
           </motion.div>
 
           <motion.div
-            whileHover={{ scale: 1.02, rotate: 0 }}
-            initial={{ rotate: 1.5 }}
-            transition={springBouncy}
+            whileHover={{ scale: 1.04, rotate: 0, y: -8 }}
+            initial={{ rotate: 2.5 }}
+            transition={springPlayful}
           >
-            <Card className="candy-glow-pink border-border/50">
+            <Card className="candy-glow-pink border border-secondary/40 overflow-hidden candy-gradient-border">
+              <div className="h-1.5 bg-secondary w-full" aria-hidden="true" />
               <CardHeader>
-                <CardTitle className="font-heading font-bold">
+                <CardTitle className="font-heading font-bold text-secondary">
                   Team Activity
                 </CardTitle>
                 <CardDescription>
@@ -272,9 +310,11 @@ export default function Components() {
                 </p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" size="sm" className="rounded-full">
-                  See All
-                </Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={springPlayful}>
+                  <Button variant="outline" size="sm" className="rounded-full border font-bold">
+                    See All
+                  </Button>
+                </motion.div>
               </CardFooter>
             </Card>
           </motion.div>
@@ -282,21 +322,24 @@ export default function Components() {
       </section>
 
       {/* Dialog Section */}
-      <section>
+      <section className="candy-section-violet rounded-3xl p-8 -mx-4 sm:-mx-6 lg:-mx-8">
         <SectionHeader
           id="dialog"
           title="Dialog"
           description="Modal dialogs with rounded corners and smooth transitions."
+          color="violet"
         />
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="rounded-full candy-gradient-bg text-white border-0 candy-glow">
-              Open Dialog
-            </Button>
+            <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95, rotate: -3 }} transition={springPlayful} className="inline-block">
+              <Button className="rounded-full candy-gradient-bg text-white border-0 candy-glow candy-shimmer font-bold">
+                Open Dialog
+              </Button>
+            </motion.div>
           </DialogTrigger>
-          <DialogContent className="rounded-[20px]">
+          <DialogContent className="rounded-[20px] border border-primary/30">
             <DialogHeader>
-              <DialogTitle className="font-heading font-bold">
+              <DialogTitle className="font-heading font-bold candy-gradient-text">
                 Confirm Action
               </DialogTitle>
               <DialogDescription>
@@ -306,12 +349,12 @@ export default function Components() {
             </DialogHeader>
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="outline" className="rounded-full">
+                <Button variant="outline" className="rounded-full border font-bold">
                   Cancel
                 </Button>
               </DialogClose>
               <DialogClose asChild>
-                <Button className="rounded-full candy-gradient-bg text-white border-0">
+                <Button className="rounded-full candy-gradient-bg text-white border-0 candy-shimmer font-bold">
                   Deploy Now
                 </Button>
               </DialogClose>
@@ -325,28 +368,29 @@ export default function Components() {
         <SectionHeader
           id="table"
           title="Table"
-          description="Data tables with rounded containers and playful badges."
+          description="Gradient headers, alternating colored rows, and playful badges."
+          color="pink"
         />
-        <Card className="candy-glow border-border/50">
+        <Card className="candy-glow-pink border border-secondary/30 candy-gradient-border overflow-hidden">
           <CardContent className="pt-6">
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead>Service</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Version</TableHead>
-                  <TableHead className="hidden sm:table-cell">
+                <TableRow className="candy-table-header">
+                  <TableHead className="font-bold">Service</TableHead>
+                  <TableHead className="font-bold">Status</TableHead>
+                  <TableHead className="font-bold">Version</TableHead>
+                  <TableHead className="hidden sm:table-cell font-bold">
                     Updated
                   </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
+                <TableRow className="candy-row-alt hover:bg-primary/5 transition-colors">
                   <TableCell className="font-medium">api-gateway</TableCell>
                   <TableCell>
                     <Badge
                       variant="outline"
-                      className="rounded-full border-accent/50 text-accent"
+                      className="rounded-full border-accent/50 text-accent border font-semibold"
                     >
                       Healthy
                     </Badge>
@@ -356,12 +400,12 @@ export default function Components() {
                     2 hours ago
                   </TableCell>
                 </TableRow>
-                <TableRow>
+                <TableRow className="candy-row-alt hover:bg-primary/5 transition-colors">
                   <TableCell className="font-medium">auth-service</TableCell>
                   <TableCell>
                     <Badge
                       variant="outline"
-                      className="rounded-full border-accent/50 text-accent"
+                      className="rounded-full border-accent/50 text-accent border font-semibold"
                     >
                       Healthy
                     </Badge>
@@ -371,10 +415,10 @@ export default function Components() {
                     5 hours ago
                   </TableCell>
                 </TableRow>
-                <TableRow>
+                <TableRow className="candy-row-alt hover:bg-primary/5 transition-colors">
                   <TableCell className="font-medium">web-app</TableCell>
                   <TableCell>
-                    <Badge variant="destructive" className="rounded-full">
+                    <Badge variant="destructive" className="rounded-full font-semibold">
                       Down
                     </Badge>
                   </TableCell>
@@ -383,12 +427,12 @@ export default function Components() {
                     1 hour ago
                   </TableCell>
                 </TableRow>
-                <TableRow>
+                <TableRow className="candy-row-alt hover:bg-primary/5 transition-colors">
                   <TableCell className="font-medium">data-pipeline</TableCell>
                   <TableCell>
                     <Badge
                       variant="secondary"
-                      className="rounded-full"
+                      className="rounded-full font-semibold"
                     >
                       Deploying
                     </Badge>
@@ -405,22 +449,31 @@ export default function Components() {
       </section>
 
       {/* Badge Section */}
-      <section>
+      <section className="candy-section-cyan rounded-3xl p-8 -mx-4 sm:-mx-6 lg:-mx-8">
         <SectionHeader
           id="badge"
           title="Badge"
-          description="Pill-shaped badges in every color of the rainbow."
+          description="Pill-shaped badges in every flavor of candy."
+          color="cyan"
         />
         <div className="space-y-4">
           <div>
-            <h3 className="text-sm font-semibold text-muted-foreground mb-3">
+            <h3 className="text-sm font-bold text-accent mb-3 uppercase tracking-wide">
               Variants
             </h3>
             <div className="flex flex-wrap gap-3">
-              <Badge>Default</Badge>
-              <Badge variant="secondary">Secondary</Badge>
-              <Badge variant="destructive">Destructive</Badge>
-              <Badge variant="outline">Outline</Badge>
+              <Badge className="rounded-full px-4 py-1 font-bold">Default</Badge>
+              <Badge variant="secondary" className="rounded-full px-4 py-1 font-bold">Secondary</Badge>
+              <Badge variant="destructive" className="rounded-full px-4 py-1 font-bold">Destructive</Badge>
+              <Badge variant="outline" className="rounded-full px-4 py-1 border font-bold">Outline</Badge>
+              {/* Gradient badge */}
+              <span className="inline-flex items-center rounded-full px-4 py-1 text-xs font-bold text-white candy-gradient-bg candy-glow">
+                Gradient
+              </span>
+              {/* Cyan badge */}
+              <span className="inline-flex items-center rounded-full px-4 py-1 text-xs font-bold bg-accent text-accent-foreground candy-glow-cyan">
+                Accent
+              </span>
             </div>
           </div>
         </div>
@@ -431,11 +484,12 @@ export default function Components() {
         <SectionHeader
           id="tabs"
           title="Tabs"
-          description="Tabbed interfaces with default and line variants."
+          description="Tabbed interfaces with gradient indicators."
+          color="violet"
         />
         <div className="space-y-8">
           <div>
-            <h3 className="text-sm font-semibold text-muted-foreground mb-3">
+            <h3 className="text-sm font-bold text-primary mb-3 uppercase tracking-wide">
               Default Variant
             </h3>
             <Tabs defaultValue="overview">
@@ -445,7 +499,7 @@ export default function Components() {
                 <TabsTrigger value="settings">Settings</TabsTrigger>
               </TabsList>
               <TabsContent value="overview" className="mt-4">
-                <Card className="candy-glow border-border/50">
+                <Card className="candy-glow border border-primary/30 candy-gradient-border">
                   <CardContent className="pt-6">
                     <p className="text-muted-foreground">
                       Overview tab content showing general metrics and summaries.
@@ -454,7 +508,7 @@ export default function Components() {
                 </Card>
               </TabsContent>
               <TabsContent value="analytics" className="mt-4">
-                <Card className="candy-glow border-border/50">
+                <Card className="candy-glow border border-primary/30 candy-gradient-border">
                   <CardContent className="pt-6">
                     <p className="text-muted-foreground">
                       Analytics tab with detailed charts and data breakdowns.
@@ -463,7 +517,7 @@ export default function Components() {
                 </Card>
               </TabsContent>
               <TabsContent value="settings" className="mt-4">
-                <Card className="candy-glow border-border/50">
+                <Card className="candy-glow border border-primary/30 candy-gradient-border">
                   <CardContent className="pt-6">
                     <p className="text-muted-foreground">
                       Settings tab for configuring dashboard preferences.
@@ -475,7 +529,7 @@ export default function Components() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-muted-foreground mb-3">
+            <h3 className="text-sm font-bold text-secondary mb-3 uppercase tracking-wide">
               Line Variant
             </h3>
             <Tabs defaultValue="deploys">
@@ -505,52 +559,61 @@ export default function Components() {
       </section>
 
       {/* Toast Section */}
-      <section>
+      <section className="candy-section-pink rounded-3xl p-8 -mx-4 sm:-mx-6 lg:-mx-8">
         <SectionHeader
           id="toast"
           title="Toast"
-          description="Notification toasts in multiple flavors."
+          description="Notification toasts in multiple candy flavors."
+          color="pink"
         />
         <div className="flex flex-wrap gap-3">
-          <Button
-            onClick={() => toast("Deploy started", { description: "api-gateway v2.4.2" })}
-            className="rounded-full candy-gradient-bg text-white border-0"
-          >
-            Default Toast
-          </Button>
-          <Button
-            variant="outline"
-            className="rounded-full"
-            onClick={() =>
-              toast.success("Deploy successful", {
-                description: "api-gateway is now live.",
-              })
-            }
-          >
-            Success Toast
-          </Button>
-          <Button
-            variant="destructive"
-            className="rounded-full"
-            onClick={() =>
-              toast.error("Deploy failed", {
-                description: "web-app build error on line 42.",
-              })
-            }
-          >
-            Error Toast
-          </Button>
-          <Button
-            variant="secondary"
-            className="rounded-full"
-            onClick={() =>
-              toast.warning("Rate limit approaching", {
-                description: "85% of API quota used.",
-              })
-            }
-          >
-            Warning Toast
-          </Button>
+          <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95, rotate: -2 }} transition={springPlayful}>
+            <Button
+              onClick={() => toast("Deploy started", { description: "api-gateway v2.4.2" })}
+              className="rounded-full candy-gradient-bg text-white border-0 candy-shimmer font-bold"
+            >
+              Default Toast
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={springPlayful}>
+            <Button
+              variant="outline"
+              className="rounded-full border font-bold"
+              onClick={() =>
+                toast.success("Deploy successful", {
+                  description: "api-gateway is now live.",
+                })
+              }
+            >
+              Success Toast
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={springPlayful}>
+            <Button
+              variant="destructive"
+              className="rounded-full font-bold"
+              onClick={() =>
+                toast.error("Deploy failed", {
+                  description: "web-app build error on line 42.",
+                })
+              }
+            >
+              Error Toast
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={springPlayful}>
+            <Button
+              variant="secondary"
+              className="rounded-full font-bold"
+              onClick={() =>
+                toast.warning("Rate limit approaching", {
+                  description: "85% of API quota used.",
+                })
+              }
+            >
+              Warning Toast
+            </Button>
+          </motion.div>
         </div>
       </section>
     </div>

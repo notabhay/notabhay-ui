@@ -34,7 +34,7 @@ export function Navbar() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`flex items-center border-r-4 border-border px-6 py-4 font-heading text-xs font-600 uppercase tracking-[0.15em] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-2px] ${
+                className={`flex items-center border-r-4 border-border px-6 py-4 font-heading text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-2px] ${
                   isActive
                     ? "bg-foreground text-background"
                     : "hover:bg-muted"
@@ -78,7 +78,7 @@ export function Navbar() {
                 key={item.href}
                 to={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`block border-b-2 border-border px-6 py-4 font-heading text-xs font-600 uppercase tracking-[0.15em] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-2px] ${
+                className={`block border-b-2 border-border px-6 py-4 font-heading text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-2px] ${
                   isActive
                     ? "bg-foreground text-background"
                     : "hover:bg-muted"

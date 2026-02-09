@@ -24,7 +24,7 @@ export default function Dashboard() {
       {/* Header */}
       <FadeIn>
         <div>
-          <h1 className="font-heading text-xl font-bold tracking-tight">
+          <h1 className="font-heading text-xl font-bold tracking-tighter">
             Dashboard
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
@@ -45,7 +45,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="flex items-end justify-between">
-                  <span className="font-heading text-2xl font-bold tracking-tight">
+                  <span className="font-heading text-2xl font-bold tracking-tighter tabular-nums">
                     {stat.value}
                   </span>
                   <span
@@ -75,7 +75,7 @@ export default function Dashboard() {
         <FadeIn delay={0.1} className="lg:col-span-2">
           <Card className="border border-border bg-card shadow-none">
             <CardHeader>
-              <CardTitle className="font-heading text-sm font-semibold tracking-tight">
+              <CardTitle className="font-heading text-sm font-semibold tracking-tighter">
                 Recent Deploys
               </CardTitle>
             </CardHeader>
@@ -150,7 +150,7 @@ export default function Dashboard() {
         <FadeIn delay={0.2}>
           <Card className="border border-border bg-card shadow-none">
             <CardHeader>
-              <CardTitle className="font-heading text-sm font-semibold tracking-tight">
+              <CardTitle className="font-heading text-sm font-semibold tracking-tighter">
                 Deploys This Week
               </CardTitle>
             </CardHeader>
@@ -161,12 +161,12 @@ export default function Dashboard() {
                     key={day.day}
                     className="flex-1 flex flex-col items-center gap-1"
                   >
-                    <span className="text-xs text-muted-foreground font-heading">
+                    <span className="text-xs text-muted-foreground font-heading tabular-nums">
                       {day.count}
                     </span>
                     <div className="w-full relative" style={{ height: "120px" }}>
                       <div
-                        className="absolute bottom-0 w-full bg-primary/80 rounded-sm transition-all duration-300"
+                        className="absolute bottom-0 w-full bg-primary rounded-sm transition-all duration-300"
                         style={{
                           height: `${(day.count / maxDeploys) * 100}%`,
                         }}

@@ -1,3 +1,13 @@
+import { Link } from "react-router";
+
+const footerNavItems = [
+  { label: "Home", href: "/" },
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "Components", href: "/components" },
+  { label: "Login", href: "/login" },
+  { label: "Signup", href: "/signup" },
+];
+
 export function Footer() {
   return (
     <footer className="border-t border-border" aria-label="Footer">
@@ -15,11 +25,14 @@ export function Footer() {
         <div className="border-b md:border-b-0 md:border-r border-border p-6">
           <p className="swiss-label text-muted-foreground mb-4">02 — NAVIGATION</p>
           <ul className="space-y-2">
-            {["Home", "Dashboard", "Components", "Login"].map((item) => (
-              <li key={item}>
-                <span className="text-sm text-foreground uppercase tracking-wider">
-                  {item}
-                </span>
+            {footerNavItems.map((item) => (
+              <li key={item.label}>
+                <Link
+                  to={item.href}
+                  className="text-sm text-foreground uppercase tracking-wider swiss-mechanical hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring px-2"
+                >
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -54,7 +67,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-border px-6 py-4 flex items-center justify-between">
         <p className="text-xs text-muted-foreground uppercase tracking-widest">
-          &copy; 2024 Flux Analytics
+          &copy; 2026 Flux Analytics
         </p>
         <p className="text-xs text-muted-foreground uppercase tracking-widest">
           Swiss / International

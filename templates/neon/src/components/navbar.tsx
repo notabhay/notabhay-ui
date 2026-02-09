@@ -28,7 +28,7 @@ export function Navbar() {
         >
           <Terminal className="h-4 w-4 text-primary" />
           <span className="text-foreground">flux</span>
-          <span className="text-primary">_</span>
+          <span className="text-primary neon-text-glow">_</span>
         </Link>
 
         {/* Desktop nav */}
@@ -40,8 +40,8 @@ export function Navbar() {
               className={cn(
                 "px-3 py-1.5 text-xs font-heading rounded-sm transition-colors duration-250 ease-out-expo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 location.pathname === item.href
-                  ? "text-primary bg-muted"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-primary bg-muted neon-text-glow"
+                  : "text-muted-foreground hover:text-foreground neon-glitch"
               )}
             >
               {item.label}
@@ -105,7 +105,7 @@ export function Navbar() {
                 className={cn(
                   "px-3 py-2 text-xs font-heading rounded-sm transition-colors duration-250 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   location.pathname === item.href
-                    ? "text-primary bg-muted"
+                    ? "text-primary bg-muted neon-text-glow"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >

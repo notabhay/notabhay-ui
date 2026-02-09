@@ -134,7 +134,7 @@ export default function Signup() {
             <div className="space-y-1">
               <label
                 htmlFor="signup-name"
-                className="font-heading text-xs small-caps tracking-wider text-muted-foreground"
+                className="font-heading text-xs tracking-wide text-muted-foreground"
               >
                 Full Name
               </label>
@@ -146,7 +146,7 @@ export default function Signup() {
                 onBlur={() => handleBlur("name")}
                 placeholder="Your full name"
                 aria-invalid={touched.name && !!errors.name}
-                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-0 focus-visible:border-primary"
+                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-primary"
               />
               {touched.name && errors.name && (
                 <p className="text-xs text-destructive mt-1">{errors.name}</p>
@@ -157,7 +157,7 @@ export default function Signup() {
             <div className="space-y-1">
               <label
                 htmlFor="signup-email"
-                className="font-heading text-xs small-caps tracking-wider text-muted-foreground"
+                className="font-heading text-xs tracking-wide text-muted-foreground"
               >
                 Email
               </label>
@@ -169,7 +169,7 @@ export default function Signup() {
                 onBlur={() => handleBlur("email")}
                 placeholder="reader@example.com"
                 aria-invalid={touched.email && !!errors.email}
-                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-0 focus-visible:border-primary"
+                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-primary"
               />
               {touched.email && errors.email && (
                 <p className="text-xs text-destructive mt-1">{errors.email}</p>
@@ -180,7 +180,7 @@ export default function Signup() {
             <div className="space-y-1">
               <label
                 htmlFor="signup-password"
-                className="font-heading text-xs small-caps tracking-wider text-muted-foreground"
+                className="font-heading text-xs tracking-wide text-muted-foreground"
               >
                 Password
               </label>
@@ -192,7 +192,7 @@ export default function Signup() {
                 onBlur={() => handleBlur("password")}
                 placeholder="Minimum 8 characters"
                 aria-invalid={touched.password && !!errors.password}
-                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-0 focus-visible:border-primary"
+                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-primary"
               />
               {/* Strength indicator */}
               {password.length > 0 && (
@@ -235,7 +235,7 @@ export default function Signup() {
             <div className="space-y-1">
               <label
                 htmlFor="signup-confirm"
-                className="font-heading text-xs small-caps tracking-wider text-muted-foreground"
+                className="font-heading text-xs tracking-wide text-muted-foreground"
               >
                 Confirm Password
               </label>
@@ -247,7 +247,7 @@ export default function Signup() {
                 onBlur={() => handleBlur("confirmPassword")}
                 placeholder="Re-enter your password"
                 aria-invalid={touched.confirmPassword && !!errors.confirmPassword}
-                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-0 focus-visible:border-primary"
+                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-primary"
               />
               {touched.confirmPassword && errors.confirmPassword && (
                 <p className="text-xs text-destructive mt-1">{errors.confirmPassword}</p>

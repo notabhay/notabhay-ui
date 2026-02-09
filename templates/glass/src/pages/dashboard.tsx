@@ -18,22 +18,38 @@ import { statCards, recentDeploys, weeklyDeploys } from "@/lib/mock-data";
 
 const maxDeploys = Math.max(...weeklyDeploys.map((d) => d.count));
 
+/* Accent colors for each stat card — mini orb tints */
+const statAccents = [
+  "oklch(0.65 0.30 275 / 12%)",
+  "oklch(0.72 0.28 330 / 10%)",
+  "oklch(0.70 0.26 200 / 10%)",
+  "oklch(0.68 0.22 150 / 10%)",
+];
+
+/* Glass card entry: materialize from atmosphere */
+const glassEntry = {
+  initial: { opacity: 0, scale: 1.05, filter: "blur(12px)" },
+  animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
+};
+
 export default function Dashboard() {
   const shouldReduceMotion = useReducedMotion();
   const transition = shouldReduceMotion
     ? { duration: 0 }
-    : { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
+    : { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const };
 
   return (
     <div className="relative p-4 sm:p-6 lg:p-8 space-y-6">
-      {/* Background orbs */}
-      <div className="orb orb-1 top-0 right-[20%] opacity-50" aria-hidden="true" />
-      <div className="orb orb-3 bottom-[20%] left-[10%] opacity-40" aria-hidden="true" />
+      {/* Background orbs for glass diffusion */}
+      <div className="orb orb-1 top-[-10%] right-[15%]" aria-hidden="true" />
+      <div className="orb orb-3 bottom-[10%] left-[5%]" aria-hidden="true" />
+      <div className="orb orb-4 top-[40%] right-[60%]" aria-hidden="true" />
+      <div className="orb orb-2 top-[60%] right-[10%]" aria-hidden="true" />
 
       {/* Header */}
       <div className="relative z-10">
-        <h1 className="font-heading text-2xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground text-sm mt-1">
+        <h1 className="font-heading text-2xl">Dashboard</h1>
+        <p className="text-muted-foreground text-sm mt-1 tracking-wide">
           Monitor your team&apos;s deployment pipeline and performance.
         </p>
       </div>
@@ -43,28 +59,35 @@ export default function Dashboard() {
         {statCards.map((stat, i) => (
           <motion.div
             key={stat.label}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={shouldReduceMotion ? undefined : glassEntry.initial}
+            animate={glassEntry.animate}
             transition={{
               ...transition,
-              delay: shouldReduceMotion ? 0 : i * 0.08,
+              delay: shouldReduceMotion ? 0 : i * 0.1,
             }}
+            whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.2 } }}
+            className="group glass-shimmer"
           >
-            <Card className="rounded-xl">
+            <Card
+              className="rounded-2xl glass-glow"
+              style={{
+                background: `linear-gradient(135deg, ${statAccents[i]}, transparent 60%), var(--card)`,
+              }}
+            >
               <CardContent className="pt-6">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground">{stat.label}</p>
-                    <p className="text-2xl font-bold font-heading mt-1">
+                    <p className="text-2xl font-heading mt-1">
                       {stat.value}
                     </p>
                   </div>
                   <div
                     className={cn(
-                      "flex items-center gap-1 text-xs font-medium rounded-full px-2 py-0.5",
+                      "flex items-center gap-1 text-xs font-medium rounded-full px-2 py-0.5 glass-subtle",
                       stat.trend === "up"
-                        ? "bg-primary/10 text-primary"
-                        : "bg-primary/10 text-primary"
+                        ? "text-primary"
+                        : "text-destructive"
                     )}
                   >
                     {stat.trend === "up" ? (
@@ -85,11 +108,11 @@ export default function Dashboard() {
       <div className="relative z-10 grid lg:grid-cols-3 gap-6">
         {/* CSS Bar Chart */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          animate={glassEntry.animate}
           transition={{ ...transition, delay: shouldReduceMotion ? 0 : 0.3 }}
         >
-          <Card className="rounded-xl h-full">
+          <Card className="rounded-2xl h-full">
             <CardHeader>
               <CardTitle className="text-sm font-medium">
                 Deploys This Week
@@ -110,12 +133,23 @@ export default function Dashboard() {
                       {d.count}
                     </span>
                     <div
-                      className="w-full rounded-t-md bg-primary/20 relative overflow-hidden"
+                      className="w-full rounded-t-lg relative overflow-hidden"
                       style={{
                         height: `${(d.count / maxDeploys) * 100}%`,
+                        background: "oklch(0.545 0.25 275 / 30%)",
+                        backdropFilter: "blur(4px) saturate(180%)",
+                        WebkitBackdropFilter: "blur(4px) saturate(180%)",
+                        border: "1px solid oklch(1 0 0 / 15%)",
+                        borderBottom: "none",
+                        boxShadow: "inset 0 1px 0 0 oklch(1 0 0 / 18%), 0 0 20px oklch(0.545 0.25 275 / 15%)",
                       }}
                     >
-                      <div className="absolute inset-0 bg-primary/40 backdrop-blur-sm" />
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background: "linear-gradient(to top, oklch(0.545 0.25 275 / 45%), oklch(0.545 0.25 275 / 15%))",
+                        }}
+                      />
                     </div>
                     <span className="text-xs text-muted-foreground">
                       {d.day}
@@ -130,11 +164,11 @@ export default function Dashboard() {
         {/* Recent Deploys Table */}
         <motion.div
           className="lg:col-span-2"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={shouldReduceMotion ? undefined : glassEntry.initial}
+          animate={glassEntry.animate}
           transition={{ ...transition, delay: shouldReduceMotion ? 0 : 0.35 }}
         >
-          <Card className="rounded-xl">
+          <Card className="rounded-2xl">
             <CardHeader>
               <CardTitle className="text-sm font-medium">
                 Recent Deploys

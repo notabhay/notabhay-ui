@@ -9,6 +9,7 @@ const navItems = [
   { label: "DASHBOARD", href: "/dashboard" },
   { label: "COMPONENTS", href: "/components" },
   { label: "LOGIN", href: "/login" },
+  { label: "SIGNUP", href: "/signup" },
 ];
 
 export function Navbar() {
@@ -28,23 +29,31 @@ export function Navbar() {
 
         {/* Desktop nav items */}
         <div className="hidden md:flex items-stretch flex-1">
-          {navItems.map((item, index) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              className={cn(
-                "flex items-center border-r border-border px-5 py-4 text-xs font-medium tracking-widest uppercase swiss-mechanical focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
-                location.pathname === item.href
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:bg-foreground hover:text-background"
-              )}
-            >
-              <span className="text-muted-foreground mr-2 swiss-section-number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item, index) => {
+            const isActive = location.pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                className={cn(
+                  "flex items-center border-r border-border px-5 py-4 text-xs font-medium tracking-widest uppercase swiss-mechanical focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
+                  isActive
+                    ? "bg-foreground text-background"
+                    : "text-muted-foreground hover:bg-foreground hover:text-background"
+                )}
+              >
+                <span
+                  className={cn(
+                    "mr-2 swiss-section-number",
+                    isActive ? "text-background" : "text-muted-foreground"
+                  )}
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {item.label}
+              </Link>
+            );
+          })}
           <div className="flex-1" />
         </div>
 
@@ -67,24 +76,32 @@ export function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-border">
-          {navItems.map((item, index) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              onClick={() => setMobileOpen(false)}
-              className={cn(
-                "flex items-center border-b border-border px-6 py-4 text-xs font-medium tracking-widest uppercase swiss-mechanical focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
-                location.pathname === item.href
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:bg-foreground hover:text-background"
-              )}
-            >
-              <span className="text-muted-foreground mr-3 swiss-section-number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item, index) => {
+            const isActive = location.pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={cn(
+                  "flex items-center border-b border-border px-6 py-4 text-xs font-medium tracking-widest uppercase swiss-mechanical focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
+                  isActive
+                    ? "bg-foreground text-background"
+                    : "text-muted-foreground hover:bg-foreground hover:text-background"
+                )}
+              >
+                <span
+                  className={cn(
+                    "mr-3 swiss-section-number",
+                    isActive ? "text-background" : "text-muted-foreground"
+                  )}
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
       )}
     </nav>

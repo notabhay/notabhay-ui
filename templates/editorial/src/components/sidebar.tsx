@@ -42,7 +42,7 @@ export function Sidebar() {
               )}
             >
               <item.icon className="h-4 w-4 shrink-0" />
-              <span className="small-caps tracking-wide">{item.label}</span>
+              <span>{item.label}</span>
             </Link>
           );
         })}

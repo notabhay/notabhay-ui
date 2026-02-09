@@ -91,7 +91,7 @@ export default function Login() {
             <div className="space-y-1">
               <label
                 htmlFor="login-email"
-                className="font-heading text-xs small-caps tracking-wider text-muted-foreground"
+                className="font-heading text-xs tracking-wide text-muted-foreground"
               >
                 Email
               </label>
@@ -103,7 +103,7 @@ export default function Login() {
                 onBlur={() => handleBlur("email")}
                 placeholder="reader@example.com"
                 aria-invalid={touched.email && !!errors.email}
-                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-0 focus-visible:border-primary"
+                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-primary"
               />
               {touched.email && errors.email && (
                 <p className="text-xs text-destructive mt-1">{errors.email}</p>
@@ -114,7 +114,7 @@ export default function Login() {
             <div className="space-y-1">
               <label
                 htmlFor="login-password"
-                className="font-heading text-xs small-caps tracking-wider text-muted-foreground"
+                className="font-heading text-xs tracking-wide text-muted-foreground"
               >
                 Password
               </label>
@@ -126,7 +126,7 @@ export default function Login() {
                 onBlur={() => handleBlur("password")}
                 placeholder="Minimum 8 characters"
                 aria-invalid={touched.password && !!errors.password}
-                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-0 focus-visible:border-primary"
+                className="border-0 border-b border-border rounded-none font-body placeholder:font-body focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-primary"
               />
               {touched.password && errors.password && (
                 <p className="text-xs text-destructive mt-1">{errors.password}</p>

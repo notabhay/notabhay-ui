@@ -62,7 +62,7 @@ export function Sidebar() {
               key={i}
               className={cn(
                 "aspect-square border border-border",
-                i % 5 === 0 ? "bg-primary/10" : "bg-transparent"
+                i % 5 === 0 ? "bg-primary/15" : "bg-transparent"
               )}
             />
           ))}

@@ -10,9 +10,9 @@ interface FadeInProps {
 export function FadeIn({ children, delay = 0, className }: FadeInProps) {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2, ease: "easeOut", delay }}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: "easeOut", delay }}
       className={className}
     >
       {children}
@@ -60,8 +60,8 @@ export function StaggerItem({
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { duration: 0.2, ease: "easeOut" } },
+        hidden: { opacity: 0, y: 8 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
       }}
       className={className}
     >

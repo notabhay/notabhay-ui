@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export function Footer() {
   return (
     <footer className="border-t border-border/50 py-12" role="contentinfo">
@@ -6,7 +8,10 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
           <div>
             <p className="font-heading text-lg font-semibold text-foreground tracking-wide">
-              Flux
+              Flux{" "}
+              <span className="text-xs text-primary font-body tracking-widest">
+                ember
+              </span>
             </p>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Real-time developer analytics for teams that ship.
@@ -18,19 +23,28 @@ export function Footer() {
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <span className="transition-colors duration-400 hover:text-primary cursor-default">
+                <Link
+                  to="/dashboard"
+                  className="transition-colors duration-400 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                >
                   Dashboards
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="transition-colors duration-400 hover:text-primary cursor-default">
+                <Link
+                  to="/dashboard"
+                  className="transition-colors duration-400 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                >
                   Deploy Tracking
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="transition-colors duration-400 hover:text-primary cursor-default">
+                <Link
+                  to="/dashboard"
+                  className="transition-colors duration-400 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                >
                   Review Velocity
-                </span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -40,19 +54,28 @@ export function Footer() {
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <span className="transition-colors duration-400 hover:text-primary cursor-default">
+                <a
+                  href="#about"
+                  className="transition-colors duration-400 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                >
                   About
-                </span>
+                </a>
               </li>
               <li>
-                <span className="transition-colors duration-400 hover:text-primary cursor-default">
+                <a
+                  href="#blog"
+                  className="transition-colors duration-400 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                >
                   Blog
-                </span>
+                </a>
               </li>
               <li>
-                <span className="transition-colors duration-400 hover:text-primary cursor-default">
+                <a
+                  href="#careers"
+                  className="transition-colors duration-400 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                >
                   Careers
-                </span>
+                </a>
               </li>
             </ul>
           </div>

@@ -23,7 +23,7 @@ export function Sidebar() {
 
   return (
     <aside
-      className="hidden md:flex w-16 lg:w-64 flex-col border-r border-l-2 border-l-primary/30 bg-card shrink-0"
+      className="hidden md:flex w-16 lg:w-64 flex-col border-r border-l-2 border-l-primary/70 bg-card shrink-0"
       aria-label="Dashboard sidebar"
     >
       <div className="flex flex-col gap-1 p-2 lg:p-3">
@@ -44,7 +44,7 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-sm px-3 py-2 text-xs font-heading transition-colors duration-250 ease-out-expo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 isActive
-                  ? "bg-muted text-primary"
+                  ? "bg-muted text-primary neon-text-glow"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
               title={item.label}

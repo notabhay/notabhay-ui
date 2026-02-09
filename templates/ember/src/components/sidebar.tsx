@@ -21,14 +21,24 @@ export function Sidebar() {
 
   return (
     <aside
-      className="hidden lg:flex w-60 flex-col border-r border-primary/20 bg-background/50"
+      className="hidden lg:flex w-60 flex-col bg-background/50 relative"
       role="complementary"
       aria-label="Dashboard sidebar"
     >
+      {/* Gold rule right edge */}
+      <div
+        className="absolute right-0 top-0 bottom-0 w-px"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent, var(--primary) 20%, var(--primary) 80%, transparent)",
+          opacity: 0.4,
+        }}
+      />
       <div className="flex flex-col gap-1 px-3 py-6">
-        <p className="px-3 mb-4 font-heading text-xs font-semibold tracking-widest text-muted-foreground">
+        <p className="px-3 mb-2 font-heading text-xs font-semibold tracking-widest text-muted-foreground">
           Navigation
         </p>
+        <hr className="gold-rule mx-3 mb-4" />
         {sidebarItems.map((item) => {
           const isActive = location.pathname === item.href;
           return (

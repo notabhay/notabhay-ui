@@ -30,8 +30,16 @@ export default function Dashboard() {
 
   return (
     <div className="p-4 md:p-6 lg:p-8 space-y-6">
-      {/* Header */}
-      <div className="space-y-1">
+      {/* Header with status bar */}
+      <div className="space-y-2">
+        <div className="rounded-sm bg-muted/50 px-3 py-1.5 text-[10px] font-heading text-muted-foreground flex items-center gap-2 flex-wrap">
+          <span className="text-secondary neon-text-glow-green">[LIVE]</span>
+          <span>Connected to flux cluster</span>
+          <span className="text-primary">|</span>
+          <span>48ms latency</span>
+          <span className="text-primary">|</span>
+          <span>12 services monitored</span>
+        </div>
         <h1 className="text-lg font-heading font-semibold">
           <span className="text-primary">{">"}</span> Dashboard
         </h1>
@@ -40,11 +48,12 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Stat cards */}
+      {/* Stat cards — alternating cyan/green accents */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {statCards.map((stat, i) => {
           const Icon = statIcons[i];
           const isPositive = stat.trend === "up";
+          const isGreen = i % 2 === 1;
           return (
             <motion.div
               key={stat.label}
@@ -60,19 +69,19 @@ export default function Dashboard() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              <Card className="neon-card-accent neon-glow-sm">
+              <Card className={`${isGreen ? "neon-card-accent-green" : "neon-card-accent"} neon-glow-sm`}>
                 <CardContent className="pt-4 pb-4">
                   <div className="flex items-start justify-between">
                     <div className="space-y-2">
                       <p className="text-[10px] font-heading uppercase tracking-wider text-muted-foreground">
                         {stat.label}
                       </p>
-                      <p className="text-2xl font-heading font-bold">
+                      <p className={`text-2xl font-heading font-bold ${isGreen ? "text-secondary neon-text-glow-green" : "text-primary neon-text-glow"}`}>
                         {stat.value}
                       </p>
                     </div>
                     <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-muted">
-                      <Icon className="h-4 w-4 text-primary" />
+                      <Icon className={`h-4 w-4 ${isGreen ? "text-secondary" : "text-primary"}`} />
                     </div>
                   </div>
                   <div className="mt-2 flex items-center gap-1">
@@ -131,16 +140,16 @@ export default function Dashboard() {
                 role="img"
                 aria-label="Bar chart showing deploys this week: Monday 18, Tuesday 24, Wednesday 31, Thursday 22, Friday 28, Saturday 8, Sunday 4"
               >
-                {weeklyDeploys.map((d) => (
+                {weeklyDeploys.map((d, i) => (
                   <div
                     key={d.day}
                     className="flex-1 flex flex-col items-center gap-1.5"
                   >
-                    <span className="text-[10px] font-heading text-muted-foreground">
+                    <span className={`text-[10px] font-heading ${i % 2 === 0 ? "text-primary neon-text-glow" : "text-secondary neon-text-glow-green"}`}>
                       {d.count}
                     </span>
                     <div
-                      className="w-full rounded-sm bg-primary/80 hover:bg-primary transition-colors duration-250"
+                      className={`w-full rounded-sm ${i % 2 === 0 ? "bg-primary/80 hover:bg-primary" : "bg-secondary/80 hover:bg-secondary"} transition-colors duration-250 neon-bar`}
                       style={{
                         height: `${(d.count / maxDeploys) * 100}%`,
                         minHeight: "4px",
@@ -202,7 +211,7 @@ export default function Dashboard() {
                   {recentDeploys.map((deploy, i) => (
                     <TableRow key={i}>
                       <TableCell className="text-xs font-heading">
-                        <span className="text-primary">$</span>{" "}
+                        <span className="text-secondary">$</span>{" "}
                         {deploy.service}
                       </TableCell>
                       <TableCell>

@@ -50,56 +50,65 @@ export default function Dashboard() {
         </motion.div>
       </div>
 
-      {/* Stat Cards — flowing layout, not equal grid */}
-      <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        {statCards.map((stat, i) => (
-          <motion.div
-            key={stat.label}
-            {...(shouldReduceMotion
-              ? {}
-              : {
-                  initial: { opacity: 0, y: 16 } as const,
-                  animate: { opacity: 1, y: 0 } as const,
-                  transition: {
-                    duration: 0.4,
-                    delay: i * 0.08,
-                    type: "spring" as const,
-                    stiffness: 100,
-                  },
-                  whileHover: { scale: 1.02 } as const,
-                })}
-          >
-            <Card className="rounded-2xl border-border/40 shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <div className="flex items-start justify-between">
-                  <div className="space-y-1">
-                    <p className="text-sm text-muted-foreground">
-                      {stat.label}
-                    </p>
-                    <p className="font-heading text-2xl font-bold">
-                      {stat.value}
-                    </p>
+      {/* Stat Cards — asymmetric flowing layout on 12-col grid */}
+      <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-4">
+        {statCards.map((stat, i) => {
+          const colSpans = [
+            "xl:col-span-3",
+            "xl:col-span-4",
+            "xl:col-span-5",
+            "xl:col-span-4 xl:col-start-9",
+          ];
+          return (
+            <motion.div
+              key={stat.label}
+              className={colSpans[i]}
+              {...(shouldReduceMotion
+                ? {}
+                : {
+                    initial: { opacity: 0, y: 16 } as const,
+                    animate: { opacity: 1, y: 0 } as const,
+                    transition: {
+                      duration: 0.4,
+                      delay: i * 0.08,
+                      type: "spring" as const,
+                      stiffness: 100,
+                    },
+                    whileHover: { scale: 1.02 } as const,
+                  })}
+            >
+              <Card className="rounded-2xl border-border/60 shadow-sm hover:shadow-md transition-shadow h-full">
+                <CardContent className="pt-6">
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-1">
+                      <p className="text-sm text-muted-foreground">
+                        {stat.label}
+                      </p>
+                      <p className="font-heading text-2xl font-bold">
+                        {stat.value}
+                      </p>
+                    </div>
+                    <span
+                      className={cn(
+                        "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
+                        stat.trend === "up"
+                          ? "bg-secondary/10 text-secondary"
+                          : "bg-primary/10 text-primary"
+                      )}
+                    >
+                      {stat.trend === "up" ? (
+                        <TrendingUp className="h-3 w-3" />
+                      ) : (
+                        <TrendingDown className="h-3 w-3" />
+                      )}
+                      {stat.change}
+                    </span>
                   </div>
-                  <span
-                    className={cn(
-                      "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
-                      stat.trend === "up"
-                        ? "bg-secondary/10 text-secondary"
-                        : "bg-primary/10 text-primary"
-                    )}
-                  >
-                    {stat.trend === "up" ? (
-                      <TrendingUp className="h-3 w-3" />
-                    ) : (
-                      <TrendingDown className="h-3 w-3" />
-                    )}
-                    {stat.change}
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
+                </CardContent>
+              </Card>
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* Chart and Table side by side on large screens */}
@@ -120,7 +129,7 @@ export default function Dashboard() {
                 },
               })}
         >
-          <Card className="rounded-2xl border-border/40 shadow-sm h-full">
+          <Card className="rounded-2xl border-border/60 shadow-sm h-full">
             <CardHeader>
               <CardTitle className="font-heading text-base font-semibold">
                 Deploys This Week
@@ -137,7 +146,7 @@ export default function Dashboard() {
                       {day.count}
                     </span>
                     <motion.div
-                      className="w-full rounded-xl bg-primary/80"
+                      className="w-full rounded-xl bg-secondary/70"
                       style={{
                         height: `${(day.count / maxDeploys) * 140}px`,
                       }}
@@ -184,7 +193,7 @@ export default function Dashboard() {
                 },
               })}
         >
-          <Card className="rounded-2xl border-border/40 shadow-sm">
+          <Card className="rounded-2xl border-border/60 shadow-sm">
             <CardHeader>
               <CardTitle className="font-heading text-base font-semibold">
                 Recent Deploys

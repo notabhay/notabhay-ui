@@ -14,9 +14,9 @@
   /* Core tokens — Light mode */
   --background: oklch(0.98 0.015 74);
   --foreground: oklch(0.254 0.03 52);
-  --card: oklch(0.975 0.018 80);
+  --card: oklch(0.97 0.035 75);
   --card-foreground: oklch(0.254 0.03 52);
-  --popover: oklch(0.975 0.018 80);
+  --popover: oklch(0.97 0.035 75);
   --popover-foreground: oklch(0.254 0.03 52);
   --primary: oklch(0.57 0.255 15.2);
   --primary-foreground: oklch(1 0 0);
@@ -24,7 +24,7 @@
   --secondary-foreground: oklch(1 0 0);
   --muted: oklch(0.947 0.027 80);
   --muted-foreground: oklch(0.56 0.06 72);
-  --accent: oklch(0.57 0.255 15.2);
+  --accent: oklch(0.65 0.2 40);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.3);
   --destructive-foreground: oklch(1 0 0);
@@ -35,16 +35,16 @@
   /* Chart tokens */
   --chart-1: oklch(0.57 0.255 15.2);
   --chart-2: oklch(0.59 0.23 152);
-  --chart-3: oklch(0.57 0.255 15.2);
+  --chart-3: oklch(0.65 0.12 55);
   --chart-4: oklch(0.58 0.2175 83.6);
-  --chart-5: oklch(0.56 0.06 72);
+  --chart-5: oklch(0.50 0.08 30);
 
   /* Sidebar tokens */
   --sidebar: oklch(0.59 0.18 152);
   --sidebar-foreground: oklch(1 0 0);
   --sidebar-primary: oklch(0.57 0.255 15.2);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.57 0.255 15.2);
+  --sidebar-accent: oklch(0.65 0.2 40);
   --sidebar-accent-foreground: oklch(1 0 0);
   --sidebar-border: oklch(0.853 0.055 72);
   --sidebar-ring: oklch(0.57 0.255 15.2);
@@ -63,7 +63,7 @@
   --secondary-foreground: oklch(0.2 0.012 340);
   --muted: oklch(0.25 0.02 340);
   --muted-foreground: oklch(0.66 0.03 15);
-  --accent: oklch(0.718 0.18 349);
+  --accent: oklch(0.72 0.17 40);
   --accent-foreground: oklch(0.2 0.012 340);
   --destructive: oklch(0.637 0.237 25.3);
   --destructive-foreground: oklch(1 0 0);
@@ -74,16 +74,16 @@
   /* Chart tokens — dark */
   --chart-1: oklch(0.718 0.18 349);
   --chart-2: oklch(0.871 0.2 156);
-  --chart-3: oklch(0.718 0.18 349);
-  --chart-4: oklch(0.7945 0.165 252.5);
-  --chart-5: oklch(0.66 0.03 15);
+  --chart-3: oklch(0.72 0.12 55);
+  --chart-4: oklch(0.75 0.15 55);
+  --chart-5: oklch(0.55 0.08 30);
 
   /* Sidebar tokens — dark */
   --sidebar: oklch(0.871 0.15 156);
   --sidebar-foreground: oklch(0.2 0.012 340);
   --sidebar-primary: oklch(0.718 0.18 349);
   --sidebar-primary-foreground: oklch(0.2 0.012 340);
-  --sidebar-accent: oklch(0.718 0.18 349);
+  --sidebar-accent: oklch(0.72 0.17 40);
   --sidebar-accent-foreground: oklch(0.2 0.012 340);
   --sidebar-border: oklch(0.31 0.025 340);
   --sidebar-ring: oklch(0.718 0.18 349);
@@ -143,8 +143,40 @@ html {
 
 body {
   font-family: var(--font-body);
+  background-image:
+    radial-gradient(at 20% 20%, oklch(0.96 0.04 30 / 0.5) 0px, transparent 50%),
+    radial-gradient(at 80% 30%, oklch(0.95 0.03 150 / 0.3) 0px, transparent 50%),
+    radial-gradient(at 40% 80%, oklch(0.97 0.035 60 / 0.4) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(at 20% 20%, oklch(0.3 0.04 340 / 0.3) 0px, transparent 50%),
+    radial-gradient(at 80% 30%, oklch(0.25 0.03 150 / 0.2) 0px, transparent 50%),
+    radial-gradient(at 40% 80%, oklch(0.28 0.035 60 / 0.25) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+}
+
+/* Blob drift animation — slow organic movement */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes blob-drift-1 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -20px) rotate(5deg); }
+    66% { transform: translate(-20px, 15px) rotate(-3deg); }
+  }
+  @keyframes blob-drift-2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-25px, 25px) rotate(-4deg); }
+    66% { transform: translate(20px, -15px) rotate(6deg); }
+  }
+  @keyframes blob-drift-3 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(15px, 30px) rotate(3deg); }
+    66% { transform: translate(-30px, -10px) rotate(-5deg); }
+  }
 }

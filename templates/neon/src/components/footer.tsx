@@ -10,7 +10,7 @@ export function Footer() {
             <div className="flex items-center gap-2 font-heading text-sm font-semibold">
               <Terminal className="h-4 w-4 text-primary" />
               <span>flux</span>
-              <span className="text-primary">_</span>
+              <span className="text-primary neon-text-glow">_</span>
             </div>
             <p className="text-xs text-muted-foreground font-heading leading-relaxed">
               Real-time developer analytics for engineering teams.
@@ -76,11 +76,11 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-8 border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[10px] font-heading text-muted-foreground">
-            <span className="text-primary">{">"}</span> &copy; 2024 Flux
+            <span className="text-secondary neon-text-glow-green">{">"}</span> &copy; 2024 Flux
             Analytics. All rights reserved.
           </p>
           <p className="text-[10px] font-heading text-muted-foreground">
-            v2.4.1 | pid: 48291 | uptime: 99.97%
+            <span className="text-primary neon-text-glow">v2.4.1</span> | pid: 48291 | uptime: <span className="text-secondary">99.97%</span>
           </p>
         </div>
       </div>

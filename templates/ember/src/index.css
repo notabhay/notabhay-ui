@@ -138,14 +138,14 @@
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   mix-blend-mode: overlay;
 }
 
 .dark .grain-overlay::before {
-  opacity: 0.04;
+  opacity: 0.06;
 }
 
 /* ── Gold rule divider ─────────────────────────────────────────── */
@@ -252,9 +252,15 @@
     var(--accent) 100%
   );
   border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 8px color-mix(in oklch, var(--primary) 8%, transparent);
+  transition:
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bar-chart-bar:hover {
-  opacity: 0.85;
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px color-mix(in oklch, var(--primary) 25%, transparent);
 }

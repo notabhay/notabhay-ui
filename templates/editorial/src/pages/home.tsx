@@ -57,20 +57,20 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero section — editorial / magazine style */}
-      <section className="mx-auto max-w-6xl px-6 lg:px-8 pt-16 pb-20 md:pt-24 md:pb-28">
+      <section className="mx-auto max-w-6xl px-6 lg:px-8 pt-20 pb-24 md:pt-28 md:pb-36">
         <AnimatedSection>
           <motion.div variants={fadeUp} className="max-w-3xl">
             <p className="font-heading text-xs small-caps tracking-[0.2em] text-primary mb-6">
               Developer Analytics
             </p>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-foreground mb-8">
+            <h1 className="font-heading text-5xl md:text-6xl lg:text-[4.5rem] font-semibold leading-[1.05] tracking-[-0.02em] text-foreground mb-8">
               Ship faster with real-time developer analytics
             </h1>
           </motion.div>
 
           <motion.div variants={fadeUp} className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mt-8">
             <div className="md:col-span-7">
-              <p className="drop-cap text-lg md:text-xl text-foreground leading-[1.8]">
+              <p className="drop-cap text-lg md:text-xl text-foreground leading-[1.8] max-w-[65ch]">
                 Flux gives engineering teams visibility into deploy frequency, code review
                 velocity, and incident response — so you can measure what matters. Built for
                 teams who believe that shipping well is a discipline, not an accident.
@@ -99,18 +99,18 @@ export default function Home() {
       <hr className="hairline mx-auto max-w-6xl" />
 
       {/* Features as editorial columns */}
-      <section className="mx-auto max-w-6xl px-6 lg:px-8 py-20 md:py-28">
+      <section className="mx-auto max-w-6xl px-6 lg:px-8 py-16 md:py-24">
         <AnimatedSection>
           <motion.div variants={fadeUp} className="mb-12 md:mb-16">
             <p className="font-heading text-xs small-caps tracking-[0.2em] text-primary mb-3">
               Capabilities
             </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground tracking-tight">
+            <h2 className="font-heading text-3xl md:text-[2.75rem] font-semibold text-foreground tracking-tight leading-[1.1]">
               Four pillars of engineering visibility
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 md:[&>*:nth-child(even)]:border-l md:[&>*:nth-child(even)]:border-border/20 md:[&>*:nth-child(even)]:pl-12">
             {features.map((feature, index) => (
               <motion.article
                 key={feature.title}
@@ -149,7 +149,7 @@ export default function Home() {
             <p className="font-heading text-xs small-caps tracking-[0.2em] text-primary mb-3">
               Methodology
             </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground tracking-tight">
+            <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
               From data to decisions in three steps
             </h2>
           </motion.div>
@@ -191,7 +191,7 @@ export default function Home() {
       <hr className="hairline mx-auto max-w-6xl" />
 
       {/* CTA section */}
-      <section className="mx-auto max-w-6xl px-6 lg:px-8 py-20 md:py-28">
+      <section className="mx-auto max-w-6xl px-6 lg:px-8 py-28 md:py-40">
         <AnimatedSection className="max-w-2xl mx-auto text-center">
           <motion.p
             variants={fadeUp}
@@ -201,7 +201,7 @@ export default function Home() {
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="font-heading text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-6"
+            className="font-heading text-4xl md:text-5xl font-semibold text-foreground tracking-[-0.02em] leading-[1.1] mb-6"
           >
             Ready to see what your team is capable of?
           </motion.h2>

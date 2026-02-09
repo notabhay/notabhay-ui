@@ -13,10 +13,12 @@
     "build:packages": "bun run --filter '@notabhay-ui/tokens' build && bun run --filter '@notabhay-ui/ui' build"
   },
   "devDependencies": {
-    "typescript": "^5.7",
-    "eslint": "^9.0",
     "@eslint/js": "^9.0",
-    "typescript-eslint": "^8.0",
-    "globals": "^15.0"
+    "@playwright/test": "^1.58.2",
+    "eslint": "^9.0",
+    "globals": "^15.0",
+    "playwright": "^1.58.2",
+    "typescript": "^5.7",
+    "typescript-eslint": "^8.0"
   }
 }

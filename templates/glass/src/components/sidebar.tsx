@@ -25,17 +25,41 @@ export function Sidebar() {
 
   return (
     <aside
-      className="hidden lg:flex w-60 flex-col border-r border-border relative overflow-hidden"
+      className="hidden lg:flex w-60 flex-col relative overflow-hidden"
       role="complementary"
       aria-label="Dashboard sidebar"
+      style={{
+        borderRight: "1px solid oklch(1 0 0 / 15%)",
+      }}
     >
-      {/* Gradient orb behind sidebar */}
-      <div className="orb orb-2 -left-20 top-1/3" aria-hidden="true" />
+      {/* Bright gradient orb behind sidebar — bleeds into main content */}
+      <div className="orb orb-2 -left-32 top-[20%]" aria-hidden="true" />
+      <div className="orb orb-4 left-10 bottom-[10%]" aria-hidden="true" />
 
-      {/* Glass overlay */}
-      <div className="absolute inset-0 glass-subtle" />
+      {/* Glass overlay with stronger effect + noise */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "oklch(1 0 0 / 15%)",
+          backdropFilter: "blur(20px) saturate(200%)",
+          WebkitBackdropFilter: "blur(20px) saturate(200%)",
+          boxShadow: "inset -1px 0 0 0 oklch(1 0 0 / 10%), inset 0 1px 0 0 oklch(1 0 0 / 12%)",
+        }}
+      />
+
+      {/* Subtle gradient accent — vertical color bleed */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(180deg, oklch(0.65 0.30 275 / 6%) 0%, transparent 40%, oklch(0.68 0.22 150 / 4%) 100%)",
+        }}
+        aria-hidden="true"
+      />
 
       <nav className="relative z-10 flex flex-col gap-1 p-4" aria-label="Dashboard navigation">
+        <p className="px-3 py-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+          Navigation
+        </p>
         {sidebarItems.map((item, index) => {
           const Icon = item.icon;
           const isActive = index === 0 && location.pathname === "/dashboard";
@@ -44,10 +68,10 @@ export function Sidebar() {
               key={item.label}
               to={item.path}
               className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 isActive
-                  ? "bg-primary/15 text-primary backdrop-blur-sm"
-                  : "text-muted-foreground hover:text-foreground hover:bg-card"
+                  ? "glass-subtle text-primary shadow-[0_0_16px_oklch(0.545_0.25_275/12%)]"
+                  : "text-muted-foreground hover:text-foreground hover:bg-[oklch(1_0_0/10%)]"
               )}
             >
               <Icon className="h-4 w-4 shrink-0" />

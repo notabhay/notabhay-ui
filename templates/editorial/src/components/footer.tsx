@@ -54,7 +54,7 @@ export function Footer() {
 
         {/* Bottom rule */}
         <hr className="hairline mt-10 mb-6" />
-        <p className="text-xs text-muted-foreground text-center font-heading small-caps tracking-wider">
+        <p className="text-xs text-muted-foreground text-center font-heading">
           &copy; {new Date().getFullYear()} Flux Analytics. All rights reserved.
         </p>
       </div>

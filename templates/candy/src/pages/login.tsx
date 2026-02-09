@@ -22,10 +22,10 @@ function validatePassword(password: string): string | undefined {
   return undefined;
 }
 
-const springBouncy = {
+const springPlayful = {
   type: "spring" as const,
-  stiffness: 300,
-  damping: 15,
+  stiffness: 400,
+  damping: 10,
 };
 
 export default function Login() {
@@ -65,38 +65,47 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-12">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-12 relative candy-dots">
+      {/* Floating decorations — trimmed to 2 */}
+      <div className="absolute top-20 left-[10%] candy-float opacity-25" aria-hidden="true">
+        <div className="w-10 h-4 rounded-full candy-gradient-bg" />
+      </div>
+      <div className="absolute bottom-20 right-[15%] candy-float-slow opacity-20" aria-hidden="true">
+        <div className="w-6 h-6 rounded-xl bg-accent" />
+      </div>
+
       <motion.div
-        initial={{ y: 30, opacity: 0, scale: 0.97 }}
-        animate={{ y: 0, opacity: 1, scale: 1 }}
-        transition={springBouncy}
-        className="w-full max-w-md"
+        initial={{ y: 30, opacity: 0, scale: 0.95, rotate: -1 }}
+        animate={{ y: 0, opacity: 1, scale: 1, rotate: 0 }}
+        transition={springPlayful}
+        className="w-full max-w-md relative z-10"
       >
         {/* Logo */}
         <div className="text-center mb-8">
           <motion.div
-            whileHover={{ rotate: 15, scale: 1.1 }}
-            transition={springBouncy}
-            className="inline-flex items-center justify-center w-14 h-14 rounded-full candy-gradient-bg candy-glow mb-4"
+            whileHover={{ rotate: 20, scale: 1.15 }}
+            transition={springPlayful}
+            className="inline-flex items-center justify-center w-16 h-16 rounded-full candy-gradient-bg candy-glow-intense mb-4"
           >
-            <Sparkles className="h-7 w-7 text-white" />
+            <Sparkles className="h-8 w-8 text-white" />
           </motion.div>
-          <h1 className="font-heading font-extrabold text-3xl tracking-tight">
-            Welcome back
+          <h1 className="font-heading font-extrabold text-3xl sm:text-4xl tracking-tight">
+            <span className="text-primary">Welcome</span>{" "}
+            <span className="text-secondary">back</span>
           </h1>
           <p className="text-muted-foreground mt-1">
             Sign in to your Flux account
           </p>
         </div>
 
-        <Card className="candy-glow border-border/50">
+        <Card className="candy-glow border border-primary/30 candy-gradient-border">
           <CardContent className="p-6 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               {/* Email */}
               <div>
                 <label
                   htmlFor="login-email"
-                  className="block text-sm font-medium mb-1.5"
+                  className="block text-sm font-bold mb-1.5 text-primary"
                 >
                   Email
                 </label>
@@ -108,11 +117,11 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   onBlur={() => handleBlur("email")}
                   aria-invalid={touched.email && !!errors.email}
-                  className="rounded-full"
+                  className="rounded-full candy-input"
                   autoComplete="email"
                 />
                 {touched.email && errors.email && (
-                  <p className="text-xs text-destructive mt-1.5" role="alert">
+                  <p className="text-xs text-destructive mt-1.5 font-medium" role="alert">
                     {errors.email}
                   </p>
                 )}
@@ -122,7 +131,7 @@ export default function Login() {
               <div>
                 <label
                   htmlFor="login-password"
-                  className="block text-sm font-medium mb-1.5"
+                  className="block text-sm font-bold mb-1.5 text-primary"
                 >
                   Password
                 </label>
@@ -135,13 +144,13 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     onBlur={() => handleBlur("password")}
                     aria-invalid={touched.password && !!errors.password}
-                    className="rounded-full pr-10"
+                    className="rounded-full candy-input pr-10"
                     autoComplete="current-password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
                     aria-label={
                       showPassword ? "Hide password" : "Show password"
                     }
@@ -154,7 +163,7 @@ export default function Login() {
                   </button>
                 </div>
                 {touched.password && errors.password && (
-                  <p className="text-xs text-destructive mt-1.5" role="alert">
+                  <p className="text-xs text-destructive mt-1.5 font-medium" role="alert">
                     {errors.password}
                   </p>
                 )}
@@ -179,13 +188,13 @@ export default function Login() {
 
               {/* Submit */}
               <motion.div
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.98, rotate: -1 }}
-                transition={springBouncy}
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.97, rotate: -2 }}
+                transition={springPlayful}
               >
                 <Button
                   type="submit"
-                  className="w-full rounded-full candy-gradient-bg text-white border-0 candy-glow font-semibold h-11"
+                  className="w-full rounded-full candy-gradient-bg text-white border-0 candy-glow candy-shimmer font-bold h-12 text-base"
                 >
                   Sign In
                 </Button>
@@ -197,7 +206,7 @@ export default function Login() {
                 Don&apos;t have an account?{" "}
                 <Link
                   to="/signup"
-                  className="text-primary font-medium hover:underline"
+                  className="text-secondary font-bold hover:underline"
                 >
                   Sign up
                 </Link>

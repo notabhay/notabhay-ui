@@ -4,8 +4,6 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 import {
   Card,
   CardContent,
-  CardHeader,
-  CardTitle,
   Table,
   TableHeader,
   TableBody,
@@ -84,15 +82,13 @@ export default function Dashboard() {
           {statCards.map((stat) => (
             <motion.div key={stat.label} variants={fadeUp}>
               <Card className="border-0 shadow-none rounded-none border-b border-border/30 pb-4">
-                <CardHeader className="px-0 pb-2">
-                  <CardTitle className="font-heading text-xs small-caps tracking-wider text-muted-foreground font-normal">
-                    {stat.label}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="px-0">
-                  <div className="flex items-baseline gap-3">
-                    <span className="font-heading text-3xl font-semibold text-foreground">
-                      {stat.value}
+                <CardContent className="px-0 pt-0">
+                  <span className="font-heading text-4xl md:text-5xl font-semibold text-foreground leading-none">
+                    {stat.value}
+                  </span>
+                  <div className="flex items-center gap-3 mt-2">
+                    <span className="font-heading text-xs small-caps tracking-wider text-muted-foreground">
+                      {stat.label}
                     </span>
                     <span
                       className={cn(
@@ -130,14 +126,28 @@ export default function Dashboard() {
           {/* CSS Bar Chart */}
           <div className="md:col-span-7">
             <div className="flex items-end gap-2 h-48">
-              {weeklyDeploys.map((day) => (
+              {weeklyDeploys.map((day, i) => (
                 <div key={day.day} className="flex-1 flex flex-col items-center gap-2">
                   <span className="font-mono text-xs text-muted-foreground">
                     {day.count}
                   </span>
-                  <div
-                    className="w-full bg-primary/80 rounded-sm transition-all duration-500"
-                    style={{ height: `${(day.count / maxDeploy) * 100}%` }}
+                  <motion.div
+                    className="w-full bg-primary/80 rounded-sm"
+                    style={{
+                      height: `${(day.count / maxDeploy) * 100}%`,
+                      transformOrigin: "bottom",
+                    }}
+                    variants={{
+                      hidden: { scaleY: 0 },
+                      visible: {
+                        scaleY: 1,
+                        transition: {
+                          duration: 0.5,
+                          delay: i * 0.06,
+                          ease: "easeOut" as const,
+                        },
+                      },
+                    }}
                     role="img"
                     aria-label={`${day.day}: ${day.count} deploys`}
                   />
@@ -183,19 +193,19 @@ export default function Dashboard() {
           <Table>
             <TableHeader>
               <TableRow className="border-border/30">
-                <TableHead className="font-heading small-caps tracking-wide text-xs">
+                <TableHead className="font-heading tracking-wide text-xs">
                   Service
                 </TableHead>
-                <TableHead className="font-heading small-caps tracking-wide text-xs">
+                <TableHead className="font-heading tracking-wide text-xs">
                   Environment
                 </TableHead>
-                <TableHead className="font-heading small-caps tracking-wide text-xs">
+                <TableHead className="font-heading tracking-wide text-xs">
                   Status
                 </TableHead>
-                <TableHead className="font-heading small-caps tracking-wide text-xs">
+                <TableHead className="font-heading tracking-wide text-xs">
                   Author
                 </TableHead>
-                <TableHead className="font-heading small-caps tracking-wide text-xs">
+                <TableHead className="font-heading tracking-wide text-xs">
                   Timestamp
                 </TableHead>
               </TableRow>

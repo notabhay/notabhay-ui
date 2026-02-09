@@ -216,14 +216,14 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* Asymmetric flowing cards */}
-          <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-12 lg:gap-6">
+          {/* Asymmetric flowing cards — row 1: 7+5, row 2: offset 1+5+6 */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
             {features.map((feature, i) => {
               const colSpans = [
                 "lg:col-span-7",
                 "lg:col-span-5",
-                "lg:col-span-5 lg:col-start-2",
-                "lg:col-span-6",
+                "lg:col-span-5 lg:col-start-1",
+                "lg:col-span-6 lg:col-start-7",
               ];
               return (
                 <motion.div
@@ -260,7 +260,7 @@ export default function Home() {
       <section className="relative py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="rounded-3xl bg-card p-8 sm:p-12 lg:p-16 shadow-sm border border-border/40 relative overflow-hidden"
+            className="rounded-3xl bg-card p-8 sm:p-12 lg:p-16 shadow-sm border border-border/60 relative overflow-hidden"
             {...fadeUp}
           >
             <BlobBackground variant="subtle" />
@@ -310,7 +310,7 @@ function FeatureCard({
 }) {
   return (
     <motion.div
-      className="group rounded-2xl bg-card p-6 sm:p-8 shadow-sm border border-border/40 transition-shadow hover:shadow-md"
+      className="group rounded-2xl bg-card p-6 sm:p-8 shadow-sm border border-border/60 transition-shadow hover:shadow-md"
       {...(shouldReduceMotion
         ? {}
         : {
@@ -322,8 +322,8 @@ function FeatureCard({
             },
           })}
     >
-      <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 mb-4">
-        <Icon className="h-5 w-5 text-primary" />
+      <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/10 mb-4">
+        <Icon className="h-5 w-5 text-secondary" />
       </div>
       <h3 className="font-heading text-lg font-semibold">{title}</h3>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed">

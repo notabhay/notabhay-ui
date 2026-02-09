@@ -24,25 +24,70 @@ import { motion } from "motion/react";
 import { statCards, recentDeploys, weeklyDeploys } from "@/lib/mock-data";
 
 const statIcons = [Rocket, Clock, GitPullRequest, AlertTriangle];
+const statColors = ["violet", "pink", "cyan", "violet"] as const;
+
+const springPlayful = {
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 10,
+};
 
 const springBouncy = {
   type: "spring" as const,
   stiffness: 300,
-  damping: 15,
+  damping: 12,
+};
+
+const wobble = {
+  rotate: [0, -5, 5, -3, 3, 0],
+  transition: { duration: 0.5 },
 };
 
 const maxDeploys = Math.max(...weeklyDeploys.map((d) => d.count));
 
+const colorMap = {
+  violet: {
+    shadow: "candy-glow",
+    border: "border-primary/40",
+    topBorder: "bg-primary",
+    iconBg: "bg-primary/15",
+    iconColor: "text-primary",
+    trendBg: "bg-primary/10",
+    trendText: "text-primary",
+    valueText: "text-primary",
+  },
+  pink: {
+    shadow: "candy-glow-pink",
+    border: "border-secondary/40",
+    topBorder: "bg-secondary",
+    iconBg: "bg-secondary/15",
+    iconColor: "text-secondary",
+    trendBg: "bg-secondary/10",
+    trendText: "text-secondary",
+    valueText: "text-secondary",
+  },
+  cyan: {
+    shadow: "candy-glow-cyan",
+    border: "border-accent/40",
+    topBorder: "bg-accent",
+    iconBg: "bg-accent/15",
+    iconColor: "text-accent",
+    trendBg: "bg-accent/10",
+    trendText: "text-accent",
+    valueText: "text-accent",
+  },
+};
+
 export default function Dashboard() {
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-6">
-      {/* Header */}
+      {/* Header — solid text, no gradient */}
       <motion.div
         initial={{ y: -10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={springBouncy}
       >
-        <h1 className="font-heading font-extrabold text-2xl sm:text-3xl tracking-tight">
+        <h1 className="font-heading font-extrabold text-2xl sm:text-3xl tracking-tight text-foreground">
           Dashboard
         </h1>
         <p className="text-muted-foreground mt-1">
@@ -50,33 +95,40 @@ export default function Dashboard() {
         </p>
       </motion.div>
 
-      {/* Stat Cards Grid */}
+      {/* Stat Cards Grid — tilt on hover only, reduced stagger (0.3s total) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {statCards.map((stat, index) => {
           const Icon = statIcons[index];
           const isPositive = stat.trend === "up";
-          const rotations = [-1, 0.5, -0.5, 1];
+          const c = colorMap[statColors[index]];
 
           return (
             <motion.div
               key={stat.label}
-              initial={{ y: 20, opacity: 0, rotate: 0 }}
-              animate={{ y: 0, opacity: 1, rotate: rotations[index] }}
-              whileHover={{ scale: 1.02, rotate: 0 }}
-              transition={{ ...springBouncy, delay: index * 0.08 }}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              whileHover={{ scale: 1.04, rotate: [-2.5, 1.5, -1.5, 3][index], y: -8 }}
+              transition={{ ...springPlayful, delay: index * 0.075 }}
             >
-              <Card className="candy-glow border-border/50 hover:border-primary/30 transition-colors">
+              <Card
+                className={`${c.shadow} border ${c.border} overflow-hidden candy-gradient-border hover:candy-glow-intense transition-shadow`}
+              >
+                {/* Colored top accent */}
+                <div className={`h-1 ${c.topBorder} w-full`} aria-hidden="true" />
                 <CardContent className="p-5">
                   <div className="flex items-center justify-between mb-3">
-                    <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center">
-                      <Icon className="h-5 w-5 text-primary" />
-                    </div>
+                    <motion.div
+                      whileHover={wobble}
+                      className={`w-10 h-10 rounded-2xl ${c.iconBg} flex items-center justify-center`}
+                    >
+                      <Icon className={`h-5 w-5 ${c.iconColor}`} />
+                    </motion.div>
                     <div
                       className={cn(
                         "flex items-center gap-1 text-xs font-semibold rounded-full px-2.5 py-1",
                         isPositive
-                          ? "bg-accent/10 text-accent"
-                          : "bg-secondary/10 text-secondary"
+                          ? "bg-accent/15 text-accent"
+                          : "bg-secondary/15 text-secondary"
                       )}
                     >
                       {isPositive ? (
@@ -87,10 +139,10 @@ export default function Dashboard() {
                       {stat.change}
                     </div>
                   </div>
-                  <p className="font-heading font-extrabold text-2xl sm:text-3xl">
+                  <p className={`font-heading font-extrabold text-3xl sm:text-4xl ${c.valueText}`}>
                     {stat.value}
                   </p>
-                  <p className="text-sm text-muted-foreground mt-0.5">
+                  <p className="text-sm text-muted-foreground mt-0.5 font-medium">
                     {stat.label}
                   </p>
                 </CardContent>
@@ -100,18 +152,18 @@ export default function Dashboard() {
         })}
       </div>
 
-      {/* Two-column layout: chart + table */}
+      {/* Two-column layout: chart + table — fade together after 0.2s */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Bar Chart */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ ...springBouncy, delay: 0.35 }}
+          transition={{ ...springBouncy, delay: 0.2 }}
           className="xl:col-span-1"
         >
-          <Card className="h-full candy-glow border-border/50">
+          <Card className="h-full candy-glow border border-primary/30 candy-gradient-border">
             <CardHeader>
-              <CardTitle className="font-heading font-bold text-lg">
+              <CardTitle className="font-heading font-bold text-lg text-primary">
                 Deploys This Week
               </CardTitle>
             </CardHeader>
@@ -126,17 +178,21 @@ export default function Dashboard() {
                       initial={{ scaleY: 0 }}
                       animate={{ scaleY: 1 }}
                       transition={{
-                        ...springBouncy,
-                        delay: 0.4 + index * 0.06,
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 8,
+                        delay: 0.3 + index * 0.08,
                       }}
                       style={{ transformOrigin: "bottom" }}
                     >
-                      <span className="text-xs font-semibold text-foreground">
+                      <span className="text-xs font-bold text-primary">
                         {day.count}
                       </span>
-                      <div
+                      <motion.div
                         className="w-full rounded-full candy-gradient-bg min-h-[4px]"
                         style={{ height: `${height}%` }}
+                        whileHover={{ scaleX: 1.15 }}
+                        transition={springPlayful}
                       />
                       <span className="text-xs text-muted-foreground font-medium">
                         {day.day}
@@ -149,49 +205,42 @@ export default function Dashboard() {
           </Card>
         </motion.div>
 
-        {/* Deploys Table */}
+        {/* Deploys Table — no per-row animation */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ ...springBouncy, delay: 0.45 }}
+          transition={{ ...springBouncy, delay: 0.2 }}
           className="xl:col-span-2"
         >
-          <Card className="candy-glow border-border/50">
+          <Card className="candy-glow-pink border border-secondary/30 candy-gradient-border">
             <CardHeader>
-              <CardTitle className="font-heading font-bold text-lg">
+              <CardTitle className="font-heading font-bold text-lg text-secondary">
                 Recent Deploys
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Service</TableHead>
-                    <TableHead>Environment</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="hidden sm:table-cell">
+                  <TableRow className="candy-table-header">
+                    <TableHead className="font-bold">Service</TableHead>
+                    <TableHead className="font-bold">Environment</TableHead>
+                    <TableHead className="font-bold">Status</TableHead>
+                    <TableHead className="hidden sm:table-cell font-bold">
                       Author
                     </TableHead>
-                    <TableHead className="hidden md:table-cell">
+                    <TableHead className="hidden md:table-cell font-bold">
                       Timestamp
                     </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {recentDeploys.map((deploy, index) => (
-                    <TableRow key={`${deploy.service}-${deploy.timestamp}`}>
-                      <TableCell>
-                        <motion.span
-                          initial={{ x: -5, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          transition={{
-                            ...springBouncy,
-                            delay: 0.5 + index * 0.04,
-                          }}
-                          className="font-medium"
-                        >
-                          {deploy.service}
-                        </motion.span>
+                  {recentDeploys.map((deploy) => (
+                    <TableRow
+                      key={`${deploy.service}-${deploy.timestamp}`}
+                      className="candy-row-alt hover:bg-primary/5 transition-colors"
+                    >
+                      <TableCell className="font-medium">
+                        {deploy.service}
                       </TableCell>
                       <TableCell>
                         <Badge
@@ -200,7 +249,7 @@ export default function Dashboard() {
                               ? "default"
                               : "secondary"
                           }
-                          className="rounded-full text-xs"
+                          className="rounded-full text-xs font-semibold"
                         >
                           {deploy.environment}
                         </Badge>
@@ -213,9 +262,9 @@ export default function Dashboard() {
                               : "destructive"
                           }
                           className={cn(
-                            "rounded-full text-xs",
+                            "rounded-full text-xs font-semibold",
                             deploy.status === "success" &&
-                              "border-accent/50 text-accent"
+                              "border-accent/50 text-accent border"
                           )}
                         >
                           {deploy.status}
